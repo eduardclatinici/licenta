@@ -1,0 +1,18 @@
+<div id="user" [style.display]="loggedInDisplay">
+  <img src="./assets/img/header-toolbox/oval-2.jpg"
+  srcset="./assets/img/header-toolbox/oval-2@2x.jpg 2x,./assets/img/header-toolbox/oval-2@3x.jpg 3x"
+  class="Oval-2">
+<div id="blocks">
+<p id="email">test.email@yahoo.com</p>
+<p id="welcome-message">Welcome message</p>
+</div>
+<img src="../assets/img/header-toolbox/notification.svg"
+id="notifications">
+<img src="../assets/img/header-toolbox/shape.svg" (click)="clicked()" id="settingsWheel">
+<div *ngIf="showOrHide==1" id="settingsDropdown">
+    <ul>
+        <li>Settings</li>
+        <li (click)="logout()">Log Out</li>
+    </ul>
+</div>
+</div>

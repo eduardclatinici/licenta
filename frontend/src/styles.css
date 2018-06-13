@@ -1,0 +1,15 @@
+body{
+    font-family: Roboto, sans-serif;
+    margin:0px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.container{
+    width: 60rem;
+    padding:0;
+    
+    position: relative;
+    background-color: #ffffff;
+}

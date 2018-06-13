@@ -1,0 +1,17 @@
+.container{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.card-img-top{
+    height: 12em;
+}
+
+.row{
+    margin-bottom: 2em;
+}
+
+.card{
+    height: 100%;
+}
+

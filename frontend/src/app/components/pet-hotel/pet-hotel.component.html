@@ -1,0 +1,132 @@
+<div class="container">
+  <h5>
+      Alege camera potrivita :
+  </h5>
+<div class="row">
+  <div class="col" (click)="reservationForm(0)">
+    <img src="./assets/img/pet-hotel/dog-economy.jpg" alt="dog-economy image" class="img-thumbnail">
+    <div class="imgBtn">
+      <p>Economy</p>
+      <p class="price">50 lei</p>
+    </div>
+    <div class="desc-text">
+        <p>Padoc individual acoperit (6 metri patrati) ce contine:</p>
+        <ul>
+          <li>casuta termoizolata incalzita(3 metri patrati)</li>
+          <li>spatiu liber (3 metri patrati)</li>
+        </ul>
+    </div>
+  </div>
+  <div class="col" (click)="reservationForm(1)">
+    <img src="./assets/img/pet-hotel/dog-regular.jpg" alt="dog-regular image" class="img-thumbnail">
+    <div class="imgBtn">
+      <p>Regular</p>
+      <p class="price">70 lei</p>
+    </div>
+    <div class="desc-text">
+        <ul>
+            <li>camera clasica confort</li>
+            <li>terasa</li>
+          </ul>
+    </div>
+  </div>
+  <div class="col" (click)="reservationForm(2)">
+    <img src="./assets/img/pet-hotel/dog-vip.jpg" alt="dog-vip image" class="img-thumbnail">
+    <div class="imgBtn">
+      <p>Vip</p>
+      <p class="price">100 lei</p>
+    </div>
+    <div class="desc-text">
+        <ul>
+            <li>camera de hotel</li>
+            <li>elemente familiare de decor</li>
+            <li>televizor pornit</li>
+            <li>fotoliu</li>
+          </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col" (click)="reservationForm(3)">
+    <img src="./assets/img/pet-hotel/cat-economy.jpg" alt="cat-economy image" class="img-thumbnail">
+    <div class="imgBtn">
+      <p>Economy</p>
+      <p class="price">40 lei</p>
+    </div>
+    <div class="desc-text">
+        <ul>
+            <li>ansamblu de joaca supraetajat</li>
+            <li>jucarii</li>
+            <li>etajera</li>
+            <li>litiera</li>
+          </ul>
+    </div>
+  </div>
+  <div class="col" (click)="reservationForm(4)">
+    <img src="./assets/img/pet-hotel/cat-regular.jpg" alt="cat-regular image" class="img-thumbnail">
+    <div class="imgBtn">
+      <p>Regular</p>
+      <p class="price">60 lei</p>
+    </div>
+    <div class="desc-text">
+        <ul>
+            <li>aventura park in miniatura</li>
+          </ul>
+    </div>
+  </div>
+  <div class="col" (click)="reservationForm(5)">
+    <img src="./assets/img/pet-hotel/cat-vip.jpg" alt="cat-vip image" class="img-thumbnail">
+    <div class="imgBtn">
+      <p>Vip</p>
+      <p class="price">90 lei</p>
+    </div>
+    <div class="desc-text">
+      <h5 style="text-align: center;">Momentan indisponibil</h5>
+    </div>
+  </div>
+</div>
+
+<div class = "row">
+  <div class = "col-8">
+    <p>
+      Daca aveti nevoie de cazare pentru catelul sau pisica dumneavoastra intr-un loc sigur si confortabil la preturi accesibile, <b>Universul Woof-Woof</b> va sta la dispozitie. Fie ca plecati din oras, va lasati catelul la gradinita sau doriti sa-l educati printr-un curs intensiv de dresaj, veti gasi aici cel mai prietenos pet-hotel.
+    </p>
+    <p>
+      Servicii si facilitati incluse:
+    </p>
+    <ul>
+      <li>3 plimbari zilnice</li>
+      <li>program personalizat de masa (indicat de stapan)</li>
+      <li>50% reducere pentru al 2-lea catel cazat in acceasi camera (apartinand aceluiasi stapan)</li>
+    </ul>
+    <p>
+      Servicii optionale:
+    </p>
+
+    <ul>
+      <li>pret special de 20 RON/zi pentru acces la daycare / gradinita</li>
+      <li>program personalizat de educatie si dresaj</li>
+      <li>hrana Royal Canin si/sau hrana gatita</li>
+      <li>servicii medicale la solicitarea si indicatiile stapanului sau a medicului veterinar</li>
+    </ul>
+    <p><b>Check-in/Check-out</b>: Luni -Vineri 9:00 – 18:00, Sambata – Duminica 9:00-16:00.</p>
+    <p>
+      Rezervarile se fac cu plata in avans a unei nopti de cazare. Avansul nu se restituie in cazul anularii sau neprezentarii.
+    </p>
+    <p>
+      Pentru cazarea cainilor este necesara prezentarea carnetului de sanatate cu dovada vaccinarilor si deparazitarilor efectuate in termen, inclusiv vaccinul impotriva tusei de canisa (Nobivac KC), facut cu cel putin 4 zile inainte de cazare.
+    </p>
+    <p>
+      *imaginile camerelor au caracter informativ
+    </p>
+  </div>
+  <div class="col-4">
+      <img src="./assets/img/pet-hotel/labrador.jpg" alt="labrador image">
+  </div>
+</div>
+<app-modal-reservation *ngIf="authority=='user'" [title]="title" [dropdownType]="dropdownType" 
+                      [options]="options" [guestOptions]="guestOptions" 
+                      [selectedOption]="selectedOption" [selectedGuestOption]="selectedGuestOption">
+</app-modal-reservation>
+</div>

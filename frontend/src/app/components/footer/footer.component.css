@@ -1,0 +1,35 @@
+footer{
+    border-top: solid 1px rgba(0,0,0,0.12);
+    margin-top:40px;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    bottom:0;
+  }
+  
+footer>img{
+    height: 100%;
+    width:10%;
+    margin-left: 2%;
+}
+  
+footer>div>p{
+    margin:0px;
+}
+  
+.rights{
+    font-size: 1vw;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.7);
+}
+  
+.social{
+    margin-right: 2%;
+}
+
+.social>img{
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+  

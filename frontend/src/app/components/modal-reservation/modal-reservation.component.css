@@ -1,0 +1,25 @@
+.dropdown-item:hover{
+    background-color: #14b1ff;
+    cursor: pointer;
+}
+
+.dropdown-menu>a:hover{
+    color: white;
+}
+
+#type-selector, #guest-selector{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+h6, #dropdownMenuButton{
+    margin: 0 1em 1em 0;
+}
+
+.twoBtns{
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
