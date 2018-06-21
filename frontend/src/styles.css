@@ -1,15 +1,45 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import '../node_modules/reset-css/reset.css';
 body{
-    font-family: Roboto, sans-serif;
-    margin:0px;
-    display: flex;
-    justify-content: center;
-
+    font-family: "Roboto", sans-serif;
+    margin:0;
+    font-size: 10px;
 }
 
-.container{
-    width: 60rem;
-    padding:0;
-    
-    position: relative;
-    background-color: #ffffff;
+.dropdown-menu {
+  min-width: auto;
+  font-size: 10px;
+}
+
+.row-no-margin {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.col-no-padding{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+@media (min-width: 576px) {
+  body, .dropdown-menu{
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 992px){
+  body, .dropdown-menu{
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1440px){
+  body, .dropdown-menu{
+    font-size: 22px;
+  }
 }

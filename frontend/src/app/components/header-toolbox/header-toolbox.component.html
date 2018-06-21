@@ -1,18 +1,28 @@
-<div id="user" [style.display]="loggedInDisplay">
-  <img src="./assets/img/header-toolbox/oval-2.jpg"
-  srcset="./assets/img/header-toolbox/oval-2@2x.jpg 2x,./assets/img/header-toolbox/oval-2@3x.jpg 3x"
-  class="Oval-2">
-<div id="blocks">
-<p id="email">test.email@yahoo.com</p>
-<p id="welcome-message">Welcome message</p>
+<div class="row align-items-center">
+  <div class="col-6 hide-if-long">
+    <p>test.email@yahoo.com</p>
+  </div>
+  <div class="col-2 order-sm-first">
+    <img src="./assets/img/header-toolbox/oval-2.jpg"
+         srcset="./assets/img/header-toolbox/oval-2@2x.jpg 2x,./assets/img/header-toolbox/oval-2@3x.jpg 3x" class="avatar">
+  </div>
+  <div class="col-2">
+    <img src="../assets/img/header-toolbox/notification.svg" class="mini">
+  </div>
+  <div class="col-2">
+
+    <div class="dropdown">
+      <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+         aria-expanded="false">
+        <img src="../assets/img/header-toolbox/shape.svg" class="mini">
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolboxDropdown">
+        <a class="dropdown-item" href="#">Settings</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" (click)="logout()">Log out</a>
+      </div>
+    </div>
+
+  </div>
 </div>
-<img src="../assets/img/header-toolbox/notification.svg"
-id="notifications">
-<img src="../assets/img/header-toolbox/shape.svg" (click)="clicked()" id="settingsWheel">
-<div *ngIf="showOrHide==1" id="settingsDropdown">
-    <ul>
-        <li>Settings</li>
-        <li (click)="logout()">Log Out</li>
-    </ul>
-</div>
-</div>
+

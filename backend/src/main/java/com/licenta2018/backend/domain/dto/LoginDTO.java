@@ -1,6 +1,6 @@
 package com.licenta2018.backend.domain.dto;
 
-public class LoginModel {
+public class LoginDTO {
     private String emailAddress;
     private String password;
 

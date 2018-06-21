@@ -1,103 +1,69 @@
-#user{
-    height: 50%;
-    width: 60%;
-    display: inline-flex;
-    justify-content: flex-end;
-    position: absolute;
-    right: 3%;
-    top: 50%;
-    transform: translateY(-50%);
+.avatar {
+  height: auto;
+  width: 75%;
 }
 
-.Oval-2{
-    margin:auto 2% auto 0;
-    width: 6%;
-    height: 50%;
+.hide-if-long{
+  overflow: hidden;
 }
 
-#blocks{
-    margin: 3.5% 0 0 0;
-    position: relative;
-    max-width: 40%;
-    height: fit-content;
-    overflow: hidden;
+.mini {
+  width: 45%;
+  height: auto;
 }
 
-#email{
-    margin: 0 0 2% 0;
-    height: fit-content;
-    font-size: 0.8vw;
-    font-weight: 500;
+p {
+  visibility: hidden;
+  font-size: 11px;
 }
 
-#welcome-message{
-    margin: 2% 0 0 0;
-    height: fit-content;   
-    min-width: fit-content;
-    float: left; 
-    font-size: 0.85vw;
-    color: rgba(0, 0, 0, 0.7);
+.dropdown-toggle::after {
+  position: absolute;
+  left: -9990px;
 }
 
-#notifications{
-    display:inline-block;
-    cursor: pointer;
-    margin:auto 2% auto 2%;
-    padding: 0 2% 0 2%;
-    width: 5%;
-    height: 28%;
-    border-left:solid 1px #0092dd;
-    border-right:solid 1px #0092dd;
-
+.dropdown-menu {
+  transform: translate3d(-13px, 15px, 0px) !important
 }
 
-#settingsWheel{
-    display:inline-block;
-    margin:auto 2% auto 0;
-    width: 5%;
-    height:28%;
-    cursor: pointer;
+.dropdown-item{
+  padding: 0 0.5rem;
 }
 
-#settingsDropdown ul:before {
-    position: absolute;
-    top: -20%;
-    left:43%;
-    display: inline-block;
-    border-right: 9px solid transparent;
-    border-bottom: 9px solid #EEE;
-    border-left: 9px solid transparent;
-    content: '';
+.dropdown-item:hover{
+  color: white;
+  background-color: #0092dd;
 }
 
-#settingsDropdown{
-    width:20%;
-    position: absolute;    
-    right: -5%;
-    top:85%;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    background-color: white;
-    color: #9b9b9b;
-    z-index: 10;
+.row > div {
+  padding: 0;
 }
 
-#settingsDropdown ul{
-    position: relative;
-    width:100%;
-    list-style: none;
-    margin:0;
-    padding:0;
+@media (min-width: 576px) {
+  p {
+    visibility: visible;
+  }
+
+  .dropdown-menu {
+    transform: translate3d(-9px, 20px, 0px) !important
+  }
 }
 
-#settingsDropdown ul li{
-    line-height: 30px;
-    height: 4vmin;
-    text-align: center;
-    font-size: 1vw;
-    cursor: pointer;
+@media (min-width: 768px) {
+  p{
+    font-size: 13px;
+  }
 }
 
-#settingsDropdown ul li:hover{
-    background-color: #0092dd;
-    color:white;
+@media (min-width: 992px) {
+  p{
+    font-size: 16px;
+  }
 }
+
+@media (min-width: 1200px){
+  .dropdown-menu {
+    transform: translate3d(-11px, 30px, 0px) !important
+  }
+}
+

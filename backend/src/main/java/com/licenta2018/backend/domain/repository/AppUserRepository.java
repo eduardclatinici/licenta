@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.licenta2018.backend.domain.model.user.AppUser;
+import com.licenta2018.backend.domain.model.user.Client;
 
 @Repository
 @Transactional
-public interface AppUserRepository extends JpaRepository<AppUser,Long> {
+public interface AppUserRepository extends JpaRepository<Client,Long> {
 
-    @Query("SELECT au FROM AppUser au WHERE au.email = ?1")
-    AppUser findAppUserByEmail(String email);
+    @Query("SELECT au FROM Client au WHERE au.email = ?1")
+    Client findAppUserByEmail(String email);
 }

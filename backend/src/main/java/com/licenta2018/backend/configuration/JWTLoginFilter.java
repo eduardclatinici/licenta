@@ -1,8 +1,7 @@
 package com.licenta2018.backend.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.licenta2018.backend.domain.dto.LoginModel;
-import com.licenta2018.backend.domain.model.user.AppUser;
+import com.licenta2018.backend.domain.dto.LoginDTO;
 import com.licenta2018.backend.service.AppUserServiceImpl;
 import com.licenta2018.backend.service.TokenAuthenticationService;
 
@@ -34,8 +33,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(
             HttpServletRequest req, HttpServletResponse res)
             throws AuthenticationException, IOException, ServletException {
-        LoginModel credentials = new ObjectMapper()
-                .readValue(req.getInputStream(), LoginModel.class);
+        LoginDTO credentials = new ObjectMapper()
+                .readValue(req.getInputStream(), LoginDTO.class);
         Authentication authentication = null;
         try {
             authentication = getAuthenticationManager().authenticate(

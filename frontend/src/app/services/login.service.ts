@@ -3,10 +3,7 @@ import { LoginModel } from './../models/login.model';
 import { Injectable,Input, NgZone } from '@angular/core';
 import {UserDetailsModel} from "../models/userDetails.model";
 import {Subject} from "rxjs";
-import {HttpClient,HttpHeaders} from '@angular/common/http'
-import {Http,Response,  RequestOptions,
-    RequestMethod,Headers,
-    RequestOptionsArgs} from '@angular/http'
+import {Http} from '@angular/http'
 import {SharedData} from './sharedData.service'
 import { Router} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -19,8 +16,6 @@ export class LoginService {
     errorMessage: Subject<string> = new Subject<string>();
     loggedIn: Subject<boolean> = new Subject<boolean>();
     user: UserDetailsModel;
-    shouldResetPassword: boolean = false;
-    emailToResetPassword: string;
     constructor(private router: Router,private http:Http,
          private sharedData: SharedData,private zone:NgZone,
         private cookieService: CookieService){}
@@ -32,15 +27,11 @@ export class LoginService {
             response => {
             localStorage.setItem('currentUserToken', response.headers.get("authorization"));
             localStorage.setItem('currentUserEmail', loginModel.emailAddress);
-            this.emailToResetPassword = undefined;
-            this.shouldResetPassword = false;
             this.user = response.json() as UserDetailsModel;
             this.loggedIn.next(true);
         },error => {
             if(error.headers._headers.has("x-active")
                 &&error.headers._headers.get("x-active")[0]=="true"){
-                this.shouldResetPassword = true;
-                this.emailToResetPassword = loginModel.emailAddress;
                 this.router.navigate(["/change-password"]);
             }
             this.errorMessage.next(error._body);
@@ -50,27 +41,26 @@ export class LoginService {
     }
 
      hasRole(role:String){
-        if (this.user != undefined && localStorage.getItem('currentUserToken') && 
-            this.user.authorities.filter(auth => auth.authority == role)
-        .length>0) {
+        if (this.user != undefined && localStorage.getItem('currentUserToken') &&
+            this.user.authority==role) {
             return true;
         }
     }
 
     getUserDetails(role:String){
-        this.url2 = "/team2/java2-1.1/api/employee/userdetails";
-
-        let response:Observable<boolean | {}>
-         = this.http.get(this.url2, 
+        this.url2 = "/api/user/auth-details";
+        let response:Observable<boolean>
+         = this.http.get(this.url2,
         this.sharedData.jwt()).pipe(map(response => response.json()))
         .pipe(map((data)=>{
             this.user = data as UserDetailsModel;
             if(this.hasRole(role)){
                 return true;
             }
-            return this.goToLogginPage();
+            this.goToLogginPage()
+            return false;
         })).pipe(catchError(e=>{
-            if(e.headers.has("authorization") 
+            if(e.headers.has("authorization")
                 && e.headers.get("authorization") == 'expired'){
                     this.logout();
                     if(this.cookieService.get("rememberMe")!=undefined
@@ -86,6 +76,7 @@ export class LoginService {
             return this.goToLogginPage();
         }));
 
+
         return response;
       }
 
@@ -96,8 +87,8 @@ export class LoginService {
 
     getAuthorityRequest(){
         this.url2 = "/api/app-user/userdetails";
-        
-        return this.http.get(this.url2, 
+
+        return this.http.get(this.url2,
        this.sharedData.jwt()).pipe(map(response => response.json()));
     }
 

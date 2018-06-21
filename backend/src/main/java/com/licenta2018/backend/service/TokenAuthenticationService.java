@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.licenta2018.backend.domain.model.user.AppUser;
+import com.licenta2018.backend.domain.model.user.Client;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -69,14 +69,14 @@ public class TokenAuthenticationService {
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
-            AppUser appUser = appUserService.getByEmail(emailAddress);
+            Client client = appUserService.getByEmail(emailAddress);
             if("admin@woofwoof.com".equals(emailAddress)){
                 return new UsernamePasswordAuthenticationToken(emailAddress, null,
                         Arrays.asList(new SimpleGrantedAuthority("ADMIN") ));
             }
-            return emailAddress != null && appUser!=null ?
+            return emailAddress != null && client !=null ?
                     new UsernamePasswordAuthenticationToken(emailAddress, null,
-                            Arrays.asList(new SimpleGrantedAuthority(appUser.getRole()) )) :
+                            Arrays.asList(new SimpleGrantedAuthority(client.getRole()) )) :
                     null;
         }
         return null;

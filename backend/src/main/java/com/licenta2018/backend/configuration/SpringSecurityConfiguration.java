@@ -61,7 +61,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin@woofwoof.com").password("$2a$06$r4UGV3g2c858aPj8qkGM2u0yU8zNG5LSkrZCjf6P2DDGODp81/o7q").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admin@woofwoof.com").password("$2y$12$Ao3qD9BImy7QLX/NlbQAZOaaPmEro7CI/siqYueBz50Q0Crd9jBLu").roles("ADMIN");
         auth.userDetailsService(userDetailsService);
         auth.authenticationProvider(authenticationProvider());
 

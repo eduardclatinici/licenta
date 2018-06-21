@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {DateRange} from '../../models/dateRange.model';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
 one && two && two.year === one.year && two.month === one.month && two.day === one.day;
@@ -18,15 +19,19 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   styleUrls: ['./range-date-picker.component.css']
 })
 export class RangeDatePickerComponent implements OnInit {
+  dateRange : DateRange = new DateRange();
+  @Output()
+    dateRangeEmitter = new EventEmitter<DateRange>();
 
   hoveredDate: NgbDateStruct;
   minDate = {year: 2017, month: 1, day: 1};
     fromDate: NgbDateStruct;
     toDate: NgbDateStruct;
-  
+
     constructor(calendar: NgbCalendar) {
       this.fromDate = calendar.getToday();
       this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+      this.emitRange();
     }
 
   ngOnInit() {
@@ -41,6 +46,7 @@ export class RangeDatePickerComponent implements OnInit {
       this.toDate = null;
       this.fromDate = date;
     }
+    this.emitRange();
   }
 
   isHovered = date => this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate);
@@ -48,4 +54,9 @@ export class RangeDatePickerComponent implements OnInit {
   isFrom = date => equals(date, this.fromDate);
   isTo = date => equals(date, this.toDate);
 
+  emitRange(){
+    this.dateRange.startDate = this.fromDate;
+    this.dateRange.endDate = this.toDate;
+    this.dateRangeEmitter.emit(this.dateRange);
+  }
 }

@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -11,15 +12,15 @@
       <li class="nav-item" routerLink="pet-hotel" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a class="nav-link">Pet Hotel</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Daycare</a>
+      <li class="nav-item" routerLink="daycare" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a class="nav-link">Daycare</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Training</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Other services
+          Services
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Grooming</a>

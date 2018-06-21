@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {LoginModel} from '../../models/login.model';
 
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   passwordType: boolean = true;
   errorMessage: string;
   loginModel: LoginModel = new LoginModel();
-  
+
   constructor(private loginService:LoginService,private router:Router,
   private cookieService:CookieService){}
 
@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
       });
       this.loginService.loggedIn.subscribe(loggedIn=>{
           localStorage.setItem("loggedInDisplay","normal");
-          if(this.loginService.user.authorities[0].authority=='ADMIN'){
+          if(this.loginService.user.authority=='ADMIN'){
               this.router.navigate(['admin/employees']);
           }
-          else if(this.loginService.user.authorities[0].authority=='USER'){
+          else if(this.loginService.user.authority[0]=='USER'){
               this.router.navigate(['user/home']);
           }
       });
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   isValidEmail(email:string){
       this.errorMessage = undefined;
-      var regexp = new RegExp('^[a-z]+.[a-z]+@woofwoof.com$');
+      var regexp = new RegExp('^[a-z]+.[a-z]+[a-z].[a-z]{1,3}$');
       return regexp.test(email);
   }
 

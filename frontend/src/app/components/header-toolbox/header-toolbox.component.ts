@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-header-toolbox',
@@ -7,20 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderToolboxComponent implements OnInit {
 
-  showOrHide:boolean=false;  
+  loggedInDisplay:string;
+  email:string;
 
-  constructor() { }
+  constructor(private loginService:LoginService,private router: Router){}
 
-  ngOnInit() {
-    window.addEventListener("click",(event)=>{
-      if(event.target != document.getElementById("settingsWheel"))
-      this.showOrHide=false;
-    });
+  ngOnInit(){
+    this.update();
   }
 
-  clicked(){
-    this.showOrHide=!this.showOrHide;
- 
-   }
+  update(){
+    this.email = localStorage.getItem('currentUserEmail');
+    let item:string = localStorage.getItem('loggedInDisplay');
+    this.loggedInDisplay = item!=null?item:"none";
+
+  }
+
+  logout(){
+    this.update();
+    this.loginService.logout();
+  }
 
 }

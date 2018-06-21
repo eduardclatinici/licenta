@@ -2,6 +2,7 @@ package com.licenta2018.backend.domain.model.user;
 
 import static javax.persistence.GenerationType.*;
 
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,15 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import com.licenta2018.backend.domain.model.reservation.HotelReservation;
+
 @Entity
-@Table(name = "USERS", uniqueConstraints={@UniqueConstraint(columnNames = {"email"})})
-public abstract class AppUser {
+@Table(name = "EMPLOYEE", uniqueConstraints={@UniqueConstraint(columnNames = {"email"})})
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE)
@@ -37,14 +41,10 @@ public abstract class AppUser {
     private String email;
 
     @Column
-    @NotNull(message = "Email cannot be null")
-    private String address;
-
-    @Column
     @NotNull(message = "phone number cannot be null")
     private String phoneNumber;
 
-    @NotNull(message = "AppUser details cannot be null")
+    @NotNull(message = "Client details cannot be null")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "user_systemDetails", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "SystemUserDetails_id", referencedColumnName = "id"))

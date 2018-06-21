@@ -16,7 +16,18 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { PetHotelComponent } from './components/pet-hotel/pet-hotel.component';
 import { ModalReservationComponent } from './components/modal-reservation/modal-reservation.component';
 import { RangeDatePickerComponent } from './components/range-date-picker/range-date-picker.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {IsLoggedInService} from './services/is-logged-in.service';
+
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SharedData } from 'src/app/services/sharedData.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { DaycareComponent } from './components/daycare/daycare.component';
+import { ModalUserDataComponent } from './components/modal-user-data/modal-user-data.component';
+
+
 
 @NgModule({
   declarations: [
@@ -32,13 +43,20 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     PetHotelComponent,
     ModalReservationComponent,
     RangeDatePickerComponent,
+    DaycareComponent,
+    ModalUserDataComponent,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     routes,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    HttpClientModule,
+    HttpModule,
   ],
-  providers: [LoginService],
-  bootstrap: [AppComponent]
+  providers: [LoginService, IsLoggedInService, SharedData, CookieService, NgbActiveModal],
+  bootstrap: [AppComponent],
+  entryComponents: [ModalReservationComponent]
 })
 export class AppModule { }

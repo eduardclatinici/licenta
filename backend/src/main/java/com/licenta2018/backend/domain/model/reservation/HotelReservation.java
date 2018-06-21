@@ -8,17 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-
-import com.licenta2018.backend.domain.model.enumeration.RoomType;
-
 @Entity
-@Table(name = "ROOM_RESERVATIONS")
-public class RoomReservation {
+@Table(name = "HOTEL_RESERVATIONS")
+public class HotelReservation {
     @Id
     @GeneratedValue(strategy = SEQUENCE)
     private long id;
@@ -33,7 +29,7 @@ public class RoomReservation {
 
     @Column
     @NotNull(message = "Room type cannot be null")
-    private RoomType roomType;
+    private String roomType;
 
     @Column
     @NotNull(message = "Number of guests cannot be null")
@@ -41,4 +37,22 @@ public class RoomReservation {
     @Max(value = 4,message = "Guests number must be at most 4")
     private int numberOfGuests;
 
+    public HotelReservation(){
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
 }

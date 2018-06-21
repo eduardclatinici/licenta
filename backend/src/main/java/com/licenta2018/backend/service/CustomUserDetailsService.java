@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.licenta2018.backend.domain.model.user.AppUser;
+import com.licenta2018.backend.domain.model.user.Client;
 import com.licenta2018.backend.exceptions.AppUserNotFoundException;
 
 @Service("customUserDetailsService")
@@ -23,15 +23,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     private AppUserServiceImpl appUserService;
 
 
-    private List<GrantedAuthority> getGrantedAuthorities(AppUser appUser){
+    private List<GrantedAuthority> getGrantedAuthority(Client client){
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(appUser.getRole()));
+        authorities.add(new SimpleGrantedAuthority(client.getRole()));
         return authorities;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        AppUser appUser = appUserService.getByEmail(email);
+        Client client = appUserService.getByEmail(email);
 
         if("admin@woofwoof.com".equals(email)){
             return new User(email, "$2a$06$SEcZ7jNZNBsC8G1YAdELEurPBaYUA8KbBfF9gLpQVUnqO8X1vHatm",
@@ -39,12 +39,12 @@ public class CustomUserDetailsService implements UserDetailsService {
                     Arrays.asList(new SimpleGrantedAuthority("ADMIN"))
             );
         }
-        if(appUser==null){
+        if(client ==null){
             throw new AppUserNotFoundException("Email does not exists in database");
         }
 
-        return new User(appUser.getEmail(), appUser.getSystemUserDetails().getPassword(),
+        return new User(client.getEmail(), client.getSystemUserDetails().getPassword(),
                 true, true,
-                true , true, getGrantedAuthorities(appUser));
+                true , true, getGrantedAuthority(client));
     }
 }

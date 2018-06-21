@@ -17,9 +17,7 @@ h6, #dropdownMenuButton{
     margin: 0 1em 1em 0;
 }
 
-.twoBtns{
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
+.modal-content{
+  width: fit-content;
 }
 
