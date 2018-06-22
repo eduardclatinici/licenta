@@ -1,7 +1,7 @@
 .navbar {
   background-color: #0092dd;
   padding: 0;
-  margin: 0 0 5px 0;
+  margin: 0 0 10px 0;
 }
 
 .dropdown-item {
@@ -9,12 +9,15 @@
 
 }
 
-.navbar-toggler {
+.navbar-toggler{
   padding: 0;
+  margin-right: 10px;
+  border:0;
 }
 
-.navbar-toggler-icon {
-  height: 5px;
+.navbar-toggler-icon{
+  object-fit: contain;
+  height: 22px;
 }
 
 .dropdown-item:hover,
@@ -46,6 +49,7 @@
 .nav-link {
   text-align: center;
   white-space: nowrap;
+
 }
 
 .dropdown-toggle::after {
@@ -56,4 +60,10 @@
 
 li {
   cursor: pointer;
+}
+
+@media (min-width: 992px){
+  .nav-link{
+    padding: 12px;
+  }
 }

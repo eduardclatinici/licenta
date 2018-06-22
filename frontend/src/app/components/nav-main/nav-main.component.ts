@@ -8,9 +8,9 @@ import {Router} from '@angular/router';
 })
 export class NavMainComponent implements OnInit {
 
-  constructor(router: Router) { }
+  constructor(router: Router) {
+  }
 
   ngOnInit() {
   }
-
 }

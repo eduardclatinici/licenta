@@ -1,3 +1,7 @@
+.title-margin{
+  margin-bottom: 1em!important;
+}
+
 img{
     width: 100%;
     height: 100%;
@@ -33,6 +37,7 @@ img{
 
 .col{
     cursor: pointer;
+    object-fit: cover;
 }
 
 .desc-text{
@@ -74,6 +79,16 @@ h5{
 
 .price{
   color: #0F9D4F !important;
+}
+
+.row>div{
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px){
+  .space-3{
+    width:100%;
+  }
 }
 
 
