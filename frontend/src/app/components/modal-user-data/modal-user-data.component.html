@@ -8,44 +8,32 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group" id="type-selector">
-            <h6>Tipul camerei:</h6>
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{selectedOption}}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" *ngFor = "let option of getOtherOptions()" (click)="selectedOption=option">{{option}}</a>
-              </div>
-            </div>
-            <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-          </div>
-          <div class ="form-group">
-            <h6>Perioada:</h6>
-            <app-range-date-picker></app-range-date-picker>
-          </div>
-          <div class="form-group" id="guest-selector">
-            <h6>Numarul de oaspeti:</h6>
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{selectedGuestOption}}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" *ngFor = "let guestOption of getOtherGuestOptions()" (click)="selectedGuestOption=guestOption">{{guestOption}}</a>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-          </div> -->
-          <div class="twoBtns">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
-            <button type="submit" class="btn btn-primary">Finalizare</button>
-          </div>
-        </form>
+
+
+        <h1>Log In</h1>
+        <div id="error" ><p>{{errorMessage}}</p></div>
+        <h3>Email:</h3>
+        <input [ngClass]="{errorInput:errorMessage!=undefined}" type="text"
+               [(ngModel)]="loginModel.emailAddress"  #emailLogin/>
+        <div [hidden]="isValidEmail(emailLogin.value) || emailLogin.value==''"
+             class="alert-danger">
+          <div>Invalid email address format.</div>
+        </div>
+        <h3>Password:</h3>
+        <div id="password">
+          <input [ngClass]="{errorInput:errorMessage!=undefined}"
+                 type="{{passwordType?'password':'text'}}" [(ngModel)]="loginModel.password" #password/>
+          <img (click)="togglePassword()" src="./assets/img/login/eye-copy.png" srcset="./assets/img/login/eye-copy@2x.png 2x,
+      ./assets/img/login/eye-copy@3x.png 3x" class="eye-copy">
+        </div>
+
+
+        <label><input id="rememberme" name="rememberme" value="remember" type="checkbox" [(ngModel)] = "rememberMe"/><p> &nbsp;Remember me</p></label>
+
+        <a routerLink="/forgot-password">Forgot password?</a>
+        <input (click)="login()" type="submit"  value="Log In"/>
+
+
       </div>
       <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

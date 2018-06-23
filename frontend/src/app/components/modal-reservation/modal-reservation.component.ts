@@ -29,7 +29,7 @@ export class ModalReservationComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder
   ) {
-    this.createForm();
+      this.createForm();
   }
   private createForm() {
     this.myForm = this.formBuilder.group({

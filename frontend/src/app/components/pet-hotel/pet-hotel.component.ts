@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/login.service';
 import {ModalReservationComponent} from '../modal-reservation/modal-reservation.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {ModalUserDataComponent} from '../modal-user-data/modal-user-data.component';
 
 @Component({
   selector: 'app-pet-hotel',
@@ -20,11 +21,16 @@ export class PetHotelComponent implements OnInit {
   }
 
   reservationForm(id: number){
-    if(this.loginService.user==undefined){
-      console.log("hereTOOOOO");
-      this.router.navigate(['login']);
-    }
-    else{
+    // if(this.loginService.user==undefined){
+    //   const modalRef = this.modalService.open(ModalUserDataComponent);
+    //   modalRef.result.then((result) => {
+    //     console.log(result);
+    //   }).catch((error) => {
+    //     console.log(error);
+    //   });
+    //
+    // }
+    // else{
       const modalRef = this.modalService.open(ModalReservationComponent);
       modalRef.componentInstance.selectedRoomOption=this.options[id];
       modalRef.result.then((result) => {
@@ -32,7 +38,7 @@ export class PetHotelComponent implements OnInit {
       }).catch((error) => {
         console.log(error);
       });
-    }
+    // }
   }
 
 }

@@ -1,4 +1,4 @@
-<ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" [minDate]="minDate">
+<ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="displayMonths" [dayTemplate]="t" [minDate]="minDate">
 </ngb-datepicker>
 
 <ng-template #t let-date="date" let-focused="focused">

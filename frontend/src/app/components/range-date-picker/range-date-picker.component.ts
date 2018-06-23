@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {DateRange} from '../../models/dateRange.model';
 
@@ -24,9 +24,11 @@ export class RangeDatePickerComponent implements OnInit {
     dateRangeEmitter = new EventEmitter<DateRange>();
 
   hoveredDate: NgbDateStruct;
-  minDate = {year: 2017, month: 1, day: 1};
+  date : Date = new Date();
+  minDate = {year: this.date.getUTCFullYear(), month: 1, day: 1};
     fromDate: NgbDateStruct;
     toDate: NgbDateStruct;
+    displayMonths : Number;
 
     constructor(calendar: NgbCalendar) {
       this.fromDate = calendar.getToday();
@@ -35,6 +37,10 @@ export class RangeDatePickerComponent implements OnInit {
     }
 
   ngOnInit() {
+      if(window.innerWidth>576)
+        this.displayMonths = 2;
+      else
+        this.displayMonths = 1;
   }
 
   onDateSelection(date: NgbDateStruct) {
@@ -58,5 +64,13 @@ export class RangeDatePickerComponent implements OnInit {
     this.dateRange.startDate = this.fromDate;
     this.dateRange.endDate = this.toDate;
     this.dateRangeEmitter.emit(this.dateRange);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if(window.innerWidth>576)
+      this.displayMonths = 2;
+    else
+      this.displayMonths = 1;
   }
 }

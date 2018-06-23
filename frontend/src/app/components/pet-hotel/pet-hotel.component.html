@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row row-no-margin title-margin">
     <div class="col col-no-padding">
-      <h5>
+      <p>
         Alege camera potrivita :
-      </h5>
+      </p>
     </div>
   </div>
   <div class="row row-no-margin">
-    <div class="col-6 col-md col-no-padding" (click)="reservationForm(0)">
+    <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(0)">
       <img src="./assets/img/pet-hotel/dog-economy.jpg" alt="dog-economy image" class="img-thumbnail">
       <div class="imgBtn">
         <p>Economy</p>
@@ -21,7 +21,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-6 col-md col-no-padding" (click)="reservationForm(1)">
+    <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(1)">
       <img src="./assets/img/pet-hotel/dog-regular.jpg" alt="dog-regular image" class="img-thumbnail">
       <div class="imgBtn">
         <p>Regular</p>
@@ -34,7 +34,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-6 col-md col-no-padding" (click)="reservationForm(2)">
+    <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(2)">
       <img src="./assets/img/pet-hotel/dog-vip.jpg" alt="dog-vip image" class="img-thumbnail">
       <div class="imgBtn">
         <p>Vip</p>
@@ -52,7 +52,7 @@
 
     <div class="space-3"></div>
 
-    <div class="col-6 col-md col-no-padding" (click)="reservationForm(3)">
+    <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(3)">
       <img src="./assets/img/pet-hotel/cat-economy.jpg" alt="cat-economy image" class="img-thumbnail">
       <div class="imgBtn">
         <p>Economy</p>
@@ -67,7 +67,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-6 col-md col-no-padding" (click)="reservationForm(4)">
+    <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(4)">
       <img src="./assets/img/pet-hotel/cat-regular.jpg" alt="cat-regular image" class="img-thumbnail">
       <div class="imgBtn">
         <p>Regular</p>
@@ -79,7 +79,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-6 col-md col-no-padding" (click)="reservationForm(5)">
+    <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(5)">
       <img src="./assets/img/pet-hotel/cat-vip.jpg" alt="cat-vip image" class="img-thumbnail">
       <div class="imgBtn">
         <p>Vip</p>
@@ -91,8 +91,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-8 col-no-padding">
+  <div class="row row-no-margin">
+    <div class="col-12 col-xl-8 col-no-padding hotel-text">
       <p>
         Daca aveti nevoie de cazare pentru catelul sau pisica dumneavoastra intr-un loc sigur si confortabil la preturi
         accesibile, <b>Universul Woof-Woof</b> va sta la dispozitie. Fie ca plecati din oras sau ca aveti alte planuri
@@ -102,7 +102,7 @@
       <p>
         Servicii incluse:
       </p>
-      <ul>
+      <ul id="first-list">
         <li>3 plimbari zilnice</li>
         <li>program personalizat de masa (indicat de stapan)</li>
         <li>30% reducere pentru fiecare catel cazat in acceasi camera (apartinand aceluiasi stapan - max. 4)</li>
@@ -111,7 +111,7 @@
         Servicii optionale:
       </p>
 
-      <ul>
+      <ul id="second-list">
         <li>pret special de 20 RON/zi pentru acces la daycare / gradinita</li>
         <li>program personalizat de educatie si dresaj</li>
         <li>hrana Royal Canin si/sau hrana gatita</li>
@@ -130,8 +130,15 @@
         *imaginile camerelor au caracter informativ
       </p>
     </div>
-    <div class="col-4 col-no-padding">
-      <img src="./assets/img/pet-hotel/labrador.jpg" alt="labrador image">
+    <div class="col-4 col-no-padding image-show">
+      <div class="row row-no-margin">
+        <div class="col-12 last-img-container">
+          <img src="./assets/img/pet-hotel/labrador.jpg" class="last-img" alt="labrador image">
+        </div>
+        <div class="col-12 last-img">
+          <img src="./assets/img/pet-hotel/dog-cat.jpg" class="last-img" alt="cat and dog image">
+        </div>
+      </div>
     </div>
   </div>
 

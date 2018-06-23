@@ -57,6 +57,6 @@ import { ModalUserDataComponent } from './components/modal-user-data/modal-user-
   ],
   providers: [LoginService, IsLoggedInService, SharedData, CookieService, NgbActiveModal],
   bootstrap: [AppComponent],
-  entryComponents: [ModalReservationComponent]
+  entryComponents: [ModalReservationComponent, ModalUserDataComponent]
 })
 export class AppModule { }

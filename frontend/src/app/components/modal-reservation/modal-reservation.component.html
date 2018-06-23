@@ -1,65 +1,63 @@
-<div class="modal-content">
-  <div class="modal-header">
-    <h4 class="modal-title">Rezervare</h4>
-    <button type="button" class="close" aria-label="Close"
-            (click)="activeModal.dismiss('Cross click')">
-    </button>
-  </div>
-  <form [formGroup]="myForm" (ngSubmit)="submitForm()">
-    <div class="modal-body">
-      <div class="container">
-        <div class="form-group" id="type-selector">
-          <!--<label for="username">Username</label>-->
-          <!--<input type="text"-->
-          <!--class="form-control"-->
-          <!--formControlName="username" />-->
-
-          <h6>Tipul camerei:</h6>
-          <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-              {{selectedRoomOption}}
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" *ngFor="let option of getOtherOptions()" (click)="selectedRoomOption=option">{{option}}</a>
-            </div>
-          </div>
-
-        </div>
-        <div class="form-group">
-          <h6>Perioada:</h6>
-          <app-range-date-picker (dateRangeEmitter)="dateRangeListener($event)"></app-range-date-picker>
-          <!--<label for="password">Password</label>-->
-          <!--<input type="password" class="form-control">-->
-        </div>
-      </div>
-
-      <div class="form-group" id="guest-selector">
+<div class="modal-header">
+  <h4 class="modal-title">Rezervare</h4>
+  <button type="button" class="close" aria-label="Close"
+          (click)="activeModal.dismiss('Cross click')">
+  </button>
+</div>
+<form [formGroup]="myForm" (ngSubmit)="submitForm()">
+  <div class="modal-body">
+      <div class="form-group" id="type-selector">
         <!--<label for="username">Username</label>-->
         <!--<input type="text"-->
         <!--class="form-control"-->
         <!--formControlName="username" />-->
 
-        <h6>Numarul de oaspeti:</h6>
+        <h6>Tipul camerei:</h6>
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-            {{selectedGuestOption}}
+            {{selectedRoomOption}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" *ngFor="let option of getOtherGuestOptions()" (click)="selectedGuestOption=option">{{option}}</a>
+            <a class="dropdown-item" *ngFor="let option of getOtherOptions()" (click)="selectedRoomOption=option">{{option}}</a>
           </div>
         </div>
 
       </div>
+      <div class="form-group">
+        <h6>Perioada:</h6>
+        <app-range-date-picker (dateRangeEmitter)="dateRangeListener($event)"></app-range-date-picker>
+        <!--<label for="password">Password</label>-->
+        <!--<input type="password" class="form-control">-->
+      </div>
+
+    <div class="form-group" id="guest-selector">
+      <!--<label for="username">Username</label>-->
+      <!--<input type="text"-->
+      <!--class="form-control"-->
+      <!--formControlName="username" />-->
+
+      <h6>Numarul de oaspeti:</h6>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+          {{selectedGuestOption}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" *ngFor="let option of getOtherGuestOptions()" (click)="selectedGuestOption=option">{{option}}</a>
+        </div>
+      </div>
 
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Inchide</button>
-      <button class="btn btn-primary"
-              [disabled]="!myForm.valid">
-        Finalizeaza
-      </button>
-    </div>
-  </form>
-</div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Inchide</button>
+    <button class="btn btn-primary"
+            [disabled]="!myForm.valid">
+      Finalizeaza
+    </button>
+  </div>
+</form>
+
+
