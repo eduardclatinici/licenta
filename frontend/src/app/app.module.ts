@@ -20,12 +20,12 @@ import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {IsLoggedInService} from './services/is-logged-in.service';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { SharedData } from 'src/app/services/sharedData.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { DaycareComponent } from './components/daycare/daycare.component';
 import { ModalUserDataComponent } from './components/modal-user-data/modal-user-data.component';
+import {AuthService} from './services/auth.service';
 
 
 
@@ -55,7 +55,7 @@ import { ModalUserDataComponent } from './components/modal-user-data/modal-user-
     HttpClientModule,
     HttpModule,
   ],
-  providers: [LoginService, IsLoggedInService, SharedData, CookieService, NgbActiveModal],
+  providers: [LoginService, IsLoggedInService, CookieService, NgbActiveModal, AuthService],
   bootstrap: [AppComponent],
   entryComponents: [ModalReservationComponent, ModalUserDataComponent]
 })

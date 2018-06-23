@@ -11,8 +11,8 @@ public class HotelReservationTransformer implements Transformer<HotelReservation
     @Override
     public HotelReservation toModel(HotelReservationDTO dto) {
         HotelReservation reservation = new HotelReservation();
-        reservation.setStartDate(dto.getStartDate());
-
+//        reservation.setStartDate(dto.getStartDate());
+return null;
     }
 
     @Override

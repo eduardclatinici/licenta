@@ -47,17 +47,15 @@ public class Client {
 
     @NotNull(message = "Client details cannot be null")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_systemDetails", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "SystemUserDetails_id", referencedColumnName = "id"))
+    @JoinTable(name = "user_systemDetails", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "systemUserDetails_id", referencedColumnName = "id"))
     private SystemUserDetails systemUserDetails;
 
     @Column
     @NotNull(message = "Role cannot be null")
     private String role;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "HOTEL_RESERVATIONS", joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn (name = "reservation_id", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
     private Set<HotelReservation> roomReservations = new HashSet<>();
 
     public Client() {

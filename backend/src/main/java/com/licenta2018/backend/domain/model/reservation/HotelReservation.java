@@ -3,18 +3,26 @@ package com.licenta2018.backend.domain.model.reservation;
 import static javax.persistence.GenerationType.*;
 
 import java.sql.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.licenta2018.backend.domain.model.user.Client;
+
 @Entity
 @Table(name = "HOTEL_RESERVATIONS")
 public class HotelReservation {
+
     @Id
     @GeneratedValue(strategy = SEQUENCE)
     private long id;
@@ -33,11 +41,15 @@ public class HotelReservation {
 
     @Column
     @NotNull(message = "Number of guests cannot be null")
-    @Min(value = 1,message = "Guests number must be at least 1")
-    @Max(value = 4,message = "Guests number must be at most 4")
+    @Min(value = 1, message = "Guests number must be at least 1")
+    @Max(value = 4, message = "Guests number must be at most 4")
     private int numberOfGuests;
 
-    public HotelReservation(){
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLIENT_ID")
+    private Client client;
+
+    public HotelReservation() {
     }
 
     public void setStartDate(Date startDate) {

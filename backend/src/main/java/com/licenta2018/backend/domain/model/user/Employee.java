@@ -46,7 +46,7 @@ public class Employee {
 
     @NotNull(message = "Client details cannot be null")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_systemDetails", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"),
+    @JoinTable(name = "user_systemDetails", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "SystemUserDetails_id", referencedColumnName = "id"))
     private SystemUserDetails systemUserDetails;
 

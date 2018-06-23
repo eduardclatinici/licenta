@@ -1,125 +1,68 @@
-
-
-#container--login{
-  height: 538px;
-  width: 398px;
-  border: solid 1px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 158px;
-  margin-bottom:80px;
-}
-
-#container--login h1{
-  margin-top: 40px;
-  margin-left: 40px;
-  font-family: Roboto;
-  font-size: 32px;
-  color: #0092dd;
-  margin-bottom: 0px;
-}
-
-#container--login h3{
-  margin-left: 40px;
-  margin-bottom: 5px;
-  font-family: Roboto;
-  font-size: 18px;
-  text-align: justify;
-  color: #6b6b6b;
-}
-
-#container--login input:not([type="checkbox"]){
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-bottom:32px;
-  width: 318px;
-  height: 50px;
-  background-color: rgba(224, 224, 225, 0.15);
-  border: solid 1px #d8d8d8;
-  font-family: Roboto;
-  font-size: 18px;
-  text-align: center;
-  color: #ffffff;
-}
-
-#container--login label{
-  display: block;
-  margin-left: 40px;
-  font-family: Roboto;
-  font-size: 18px;
-  text-align: justify;
-  color: #6b6b6b;
-}
-
-#container--login label p{
-  display: inline-block;
-  position: relative;
-  top: 50%;
-  transform: translateY(-25%);
-}
-
-.eye-copy {
-  width: 19px;
-  height: 12px;
+.close{
   position: absolute;
-  right:45px;
-  top:25%;
+  right:9999px;
 }
 
-#container--login a{
-  display: block;
-  font-family: Roboto;
-  font-size: 15px;
-  color: #ec8f6e;
-  margin-left: 40px;
-  margin-bottom: 20px;
-}
-#container--login input[type="checkbox"]{
-  width: 17.8px;
-  height: 20px;
-  border: solid 2px #979797;
+.modal-header{
+  padding: 0;
 }
 
-#container--login #password{
+.modal-header>div>div{
+  padding: 16px 0 16px 0;
+  background-color: #0092dd;
+  color: white;
+  border-right: 1px solid white;
+  cursor: pointer;
+  margin:0;
+}
+
+.modal-header>div>div:hover,
+.modal-header>div>div:active{
+  background-color:#14b1ff ;
+}
+
+h4{
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
 }
 
-#container--login input[type="submit"]{
-  border-radius: 2px;
-  background-image: linear-gradient(to bottom, #009eee, #0092dd);
-  border: solid 1px #008fd7;
-}
-
-
-#container--login input[type="text"],#container--login input[type="password"]{
-  font-family: Roboto;
-  font-size: 18px;
-  text-align: justify;
-  padding-left:11.9px;
-  box-sizing: border-box;
-  color: rgba(47, 77, 95, 0.9);
-}
-
-#container--login #error{
-  height: 30px;
-  font-family: Roboto;
-  font-size: 14px;
+::-webkit-input-placeholder {
   text-align: center;
-  color: #d0011b;
-  margin: 0 40px;
 }
 
-#container--login #password .errorInput,#container--login input[type="text"].errorInput{
-  background-color: rgba(215, 104, 118, 0.28);
-}
-
-
-.alert-danger{
-  color:red;
+:-moz-placeholder { /* Firefox 18- */
   text-align: center;
-  height: 1px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;
+}
+
+:-ms-input-placeholder {
+  text-align: center;
+}
+
+
+
+
+
+.login-image{
+  max-height: 200px;
   position: relative;
-  bottom:10px;
+  left:50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
 }
+
+#email, #password{
+  width: 100%;
+  text-align:center
+}
+
+.row>div{
+  margin-bottom: 15px;
+}
+
+

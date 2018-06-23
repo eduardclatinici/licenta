@@ -4,7 +4,6 @@ import { Injectable,Input, NgZone } from '@angular/core';
 import {UserDetailsModel} from "../models/userDetails.model";
 import {Subject} from "rxjs";
 import {Http} from '@angular/http'
-import {SharedData} from './sharedData.service'
 import { Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -16,8 +15,7 @@ export class LoginService {
     errorMessage: Subject<string> = new Subject<string>();
     loggedIn: Subject<boolean> = new Subject<boolean>();
     user: UserDetailsModel;
-    constructor(private router: Router,private http:Http,
-         private sharedData: SharedData,private zone:NgZone,
+    constructor(private router: Router,private http:Http,private zone:NgZone,
         private cookieService: CookieService){}
 
     login(loginModel:LoginModel) {
@@ -35,7 +33,6 @@ export class LoginService {
                 this.router.navigate(["/change-password"]);
             }
             this.errorMessage.next(error._body);
-            error.catch
         }
     );
     }
@@ -50,8 +47,7 @@ export class LoginService {
     getUserDetails(role:String){
         this.url2 = "/api/user/auth-details";
         let response:Observable<boolean>
-         = this.http.get(this.url2,
-        this.sharedData.jwt()).pipe(map(response => response.json()))
+         = this.http.get(this.url2).pipe(map(response => response.json()))
         .pipe(map((data)=>{
             this.user = data as UserDetailsModel;
             if(this.hasRole(role)){
@@ -88,8 +84,7 @@ export class LoginService {
     getAuthorityRequest(){
         this.url2 = "/api/app-user/userdetails";
 
-        return this.http.get(this.url2,
-       this.sharedData.jwt()).pipe(map(response => response.json()));
+        return this.http.get(this.url2).pipe(map(response => response.json()));
     }
 
 
@@ -97,11 +92,11 @@ export class LoginService {
         localStorage.clear();
         this.user = undefined;
 
-        this.http.post("/logout",null,this.sharedData.jwt()).pipe(map(response => response.status)).subscribe(status=>{
+        this.http.post("/logout",null).pipe(map(response => response.status)).subscribe(status=>{
             if(status==200){
                 console.log("logout");
             }
-        })
+        });
         this.router.navigate(["/"]);
     }
 }

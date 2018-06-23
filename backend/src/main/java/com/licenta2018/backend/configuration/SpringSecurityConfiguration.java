@@ -43,17 +43,14 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/app-user/forgot-password").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/app-user/change-password").permitAll()
-                .antMatchers("/api/app-user/userdetails").hasAnyAuthority("ADMIN","USER")
-                .antMatchers("/api/app-user/user")
-                .hasAnyAuthority("USER")
+                .antMatchers("/api/app-user/userdetails").hasAnyAuthority("ADMIN","USER", "EMPLOYEE")
+                .antMatchers("/api/app-user/user").hasAnyAuthority("USER")
                 .antMatchers("/api/app-user/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessHandler(logoutHandler).invalidateHttpSession(false).permitAll()
                 .and()
                 .addFilterBefore(new JWTLoginFilter("/api/login", authenticationManager(), appUserService),
-                        UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new JWTAuthenticationFilter(appUserService),
                         UsernamePasswordAuthenticationFilter.class);
 
     }

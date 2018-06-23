@@ -1,13 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { LoginService } from './login.service'
-import {SharedData} from './sharedData.service'
-import {Http} from '@angular/http/http'
+
 @Injectable()
 export class AdminGuard implements CanActivate {
-    constructor(private router: Router,
-    private loginService: LoginService, private sharedData:SharedData,
-private http: Http) { }
+    constructor(private router: Router, private loginService: LoginService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if(this.loginService.user == undefined){
@@ -26,8 +23,7 @@ private http: Http) { }
 export class UserGuard implements CanActivate {
 
     constructor(private router: Router,
-    private loginService: LoginService, private sharedData:SharedData,
-private http: Http) { }
+    private loginService: LoginService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if(this.loginService.user == undefined){
@@ -40,4 +36,15 @@ private http: Http) { }
         this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
         return false;
     }
+}
+
+@Injectable()
+export class AuthService{
+  constructor(){}
+
+  public getAuthorizationToken(){
+    return localStorage.getItem('currentUserToken')
+  }
+
+
 }
