@@ -1,6 +1,6 @@
-<div class="row align-items-center">
+<div  *ngIf="email" class="row align-items-center">
   <div class="col-6 hide-if-long">
-    <p>test.email@yahoo.com</p>
+    <p>{{email}}</p>
   </div>
   <div class="col-2 order-sm-first">
     <img src="./assets/img/header-toolbox/oval-2.jpg"

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import 'bootstrap';
-import { LoginService } from 'src/app/services/login.service';
 import {ModalReservationComponent} from '../modal-reservation/modal-reservation.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {ModalUserDataComponent} from '../modal-user-data/modal-user-data.component';
-import {AuthService} from '../../services/auth.service';
+import {LocalStorageService} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-pet-hotel',
@@ -16,19 +15,15 @@ export class PetHotelComponent implements OnInit {
 
   options = ["Economy (Dog)","Regular (Dog)","Vip (Dog)","Economy (Cat)","Regular (Cat)","Vip (Cat)"];
 
-  constructor(private router : Router, private authService : AuthService, private modalService: NgbModal) { }
+  constructor(private router : Router,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
   }
 
   reservationForm(id: number){
-    if(!this.authService.getAuthorizationToken()){
-      const modalRef = this.modalService.open(ModalUserDataComponent);
-      modalRef.result.then((result) => {
-        console.log(result);
-      }).catch((error) => {
-        console.log(error);
-      });
+    if(!LocalStorageService.getAuthorizationToken()){
+      this.modalService.open(ModalUserDataComponent);
     }
     else{
       const modalRef = this.modalService.open(ModalReservationComponent);

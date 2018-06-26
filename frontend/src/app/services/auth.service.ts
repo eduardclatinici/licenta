@@ -1,50 +1,35 @@
 import {Injectable} from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { LoginService } from './login.service'
+import {Router} from '@angular/router';
+import {LoginModel} from '../models/login.model';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {Authority} from '../models/authority.model';
+import {UserDetailsModel} from '../models/userDetails.model';
 
 @Injectable()
-export class AdminGuard implements CanActivate {
-    constructor(private router: Router, private loginService: LoginService) { }
+export class AuthService {
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if(this.loginService.user == undefined){
-            return this.loginService.getUserDetails('ADMIN');
-        }
-        if(this.loginService.hasRole('ADMIN')){
-            return true
-        }
-
-        this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
-        return false;
-    }
-}
-
-@Injectable()
-export class UserGuard implements CanActivate {
-
-    constructor(private router: Router,
-    private loginService: LoginService) { }
-
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if(this.loginService.user == undefined){
-            return this.loginService.getUserDetails('USER');
-        }
-        if(this.loginService.hasRole('USER')){
-            return true
-        }
-
-        this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
-        return false;
-    }
-}
-
-@Injectable()
-export class AuthService{
-  constructor(){}
-
-  public getAuthorizationToken(){
-    return localStorage.getItem('currentUserToken')
+  constructor(private http: HttpClient, private router : Router, private jwtHelper : JwtHelperService) {
   }
 
+  login(loginModel: LoginModel) :Observable<HttpResponse<any>>{
+    let url = '/api/login';
+    return this.http.post(url, JSON.stringify(loginModel),{observe:'response'});
+  }
+
+  logout() : Observable<HttpResponse<any>> {
+    let url = '/logout';
+    return this.http.post(url,null,{observe: 'response'});
+  }
+
+  authDetails() : Observable<HttpResponse<UserDetailsModel>>{
+    let url = '/api/auth-details';
+    return this.http.get<UserDetailsModel>(url, {observe: 'response'});
+  }
+
+  isTokenExpired(){
+    return this.jwtHelper.isTokenExpired(this.jwtHelper.tokenGetter());
+  }
 
 }

@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CookieService} from 'angular2-cookie/services/cookies.service';
-import {LoginService} from '../../services/login.service';
 import {LoginModel} from '../../models/login.model';
-import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../services/auth.service';
+import {LocalStorageService} from '../../services/local-storage.service';
+import {SharedDataService} from '../../services/sharedData.service';
 
 @Component({
   selector: 'app-modal-user-data',
@@ -18,50 +19,61 @@ export class ModalUserDataComponent implements OnInit {
   errorMessage: string;
   loginModel: LoginModel = new LoginModel();
 
-  constructor(private loginService: LoginService, private router: Router,
-              private cookieService: CookieService, public activeModal: NgbActiveModal) {
+  constructor(private authService: AuthService, private router: Router,
+              private cookieService: CookieService, public activeModal: NgbActiveModal,
+              private localStorageService : LocalStorageService, private sharedDataService : SharedDataService) {
   }
 
   ngOnInit() {
-    if (this.cookieService.get('emailAddress') != undefined
-      && this.cookieService.get('password') != undefined
-      && this.cookieService.get('rememberMe') != undefined) {
-      this.loginModel.emailAddress = this.cookieService.get('emailAddress');
-      this.loginModel.password = this.cookieService.get('password');
-      this.rememberMe = true;
-    }
-    this.loginService.errorMessage.subscribe(message => {
-      this.errorMessage = message;
-    });
-    this.loginService.loggedIn.subscribe(loggedIn => {
-      localStorage.setItem('loggedInDisplay', 'normal');
-      if (this.loginService.user.authority == 'ADMIN') {
-        this.router.navigate(['admin/employees']);
-      }
-      else if (this.loginService.user.authority == 'USER') {
-        this.router.navigate(['user/home']);
-      }
-    });
+    this.getRememberedUserDataIfExists();
   }
 
-  togglePassword() {
+  togglePassword(){
     this.passwordType = !this.passwordType;
   }
 
   login() {
     if (this.isValidEmail(this.loginModel.emailAddress)) {
-      this.loginService.login(this.loginModel);
-      if (this.rememberMe) {
-        this.cookieService.put('emailAddress', this.loginModel.emailAddress);
-        this.cookieService.put('password', this.loginModel.password);
-        this.cookieService.put('rememberMe', 'true');
-      }
+      this.authService.login(this.loginModel).subscribe(
+        response => {
+
+          this.localStorageService.setLocalStorageItem(LocalStorageService.currentUserToken, response.headers.get('authorization'));
+          this.localStorageService.setLocalStorageItem('email', this.loginModel.emailAddress);
+
+          this.rememberUserIfTrue();
+
+          this.activeModal.close();
+        }, error => {
+          this.errorMessage = error._body;
+        }
+      );
+
+    }
+  }
+
+  getRememberedUserDataIfExists() {
+    const emailAddress = this.cookieService.get('emailAddress');
+    const password = this.cookieService.get('password');
+    if (emailAddress != undefined && password != undefined) {
+      this.loginModel.emailAddress = emailAddress;
+      this.loginModel.password = password;
+      this.rememberMe = true;
+    }
+  }
+
+  private rememberUserIfTrue() {
+    if (this.rememberMe) {
+      this.cookieService.put('emailAddress', this.loginModel.emailAddress);
+      this.cookieService.put('password', this.loginModel.password);
+    }
+    else {
+      this.cookieService.removeAll();
     }
   }
 
   isValidEmail(email: string) {
     this.errorMessage = undefined;
-    var regexp = new RegExp('^[a-z]+.[a-z]+[a-z].[a-z]{1,3}$');
+    var regexp = new RegExp('(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])');
     return regexp.test(email);
   }
 

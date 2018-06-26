@@ -41,16 +41,18 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
+                .anyRequest().authenticated()
                 .antMatchers(HttpMethod.POST, "/api/app-user/forgot-password").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/app-user/change-password").permitAll()
                 .antMatchers("/api/app-user/userdetails").hasAnyAuthority("ADMIN","USER", "EMPLOYEE")
                 .antMatchers("/api/app-user/user").hasAnyAuthority("USER")
                 .antMatchers("/api/app-user/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-                .anyRequest().authenticated()
                 .and().logout().logoutSuccessHandler(logoutHandler).invalidateHttpSession(false).permitAll()
                 .and()
                 .addFilterBefore(new JWTLoginFilter("/api/login", authenticationManager(), appUserService),
+                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTAuthenticationFilter(appUserService),
                         UsernamePasswordAuthenticationFilter.class);
 
     }

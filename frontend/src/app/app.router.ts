@@ -1,12 +1,9 @@
 import {ModuleWithProviders} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {AppComponent} from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { PetHotelComponent } from './components/pet-hotel/pet-hotel.component';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './components/home/home.component';
+import {PetHotelComponent} from './components/pet-hotel/pet-hotel.component';
 
-import {IsLoggedInService} from './services/is-logged-in.service'
 import {DaycareComponent} from './components/daycare/daycare.component';
-import {ModalUserDataComponent} from './components/modal-user-data/modal-user-data.component';
 
 
 export const router: Routes = [

@@ -7,8 +7,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavMainComponent } from './components/nav-main/nav-main.component';
 import { HeaderToolboxComponent } from './components/header-toolbox/header-toolbox.component';
-import { LoginComponent } from './components/login/login.component';
-import {LoginService} from './services/login.service';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { HomeComponent } from './components/home/home.component';
 
@@ -17,15 +15,18 @@ import { PetHotelComponent } from './components/pet-hotel/pet-hotel.component';
 import { ModalReservationComponent } from './components/modal-reservation/modal-reservation.component';
 import { RangeDatePickerComponent } from './components/range-date-picker/range-date-picker.component';
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {IsLoggedInService} from './services/is-logged-in.service';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { DaycareComponent } from './components/daycare/daycare.component';
 import { ModalUserDataComponent } from './components/modal-user-data/modal-user-data.component';
 import {AuthService} from './services/auth.service';
+import {AuthInterceptor} from './services/interceptor.service';
+import {JwtModule} from '@auth0/angular-jwt';
+import {LocalStorageService} from './services/local-storage.service';
+import {SharedDataService} from './services/sharedData.service';
 
 
 
@@ -36,7 +37,6 @@ import {AuthService} from './services/auth.service';
     FooterComponent,
     NavMainComponent,
     HeaderToolboxComponent,
-    LoginComponent,
     ForgotPasswordComponent,
     HomeComponent,
     CarouselComponent,
@@ -54,8 +54,15 @@ import {AuthService} from './services/auth.service';
     NgbModule.forRoot(),
     HttpClientModule,
     HttpModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {return LocalStorageService.getAuthorizationToken()},
+        whitelistedDomains: ['http://localhost:9999']
+      }
+    })
   ],
-  providers: [LoginService, IsLoggedInService, CookieService, NgbActiveModal, AuthService],
+  providers: [CookieService, NgbActiveModal, AuthService, LocalStorageService, SharedDataService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
   entryComponents: [ModalReservationComponent, ModalUserDataComponent]
 })

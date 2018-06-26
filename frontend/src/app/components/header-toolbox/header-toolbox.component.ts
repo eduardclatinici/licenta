@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {LoginService} from '../../services/login.service';
+import {AuthService} from '../../services/auth.service';
+import {LocalStorageService} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-header-toolbox',
@@ -9,25 +10,35 @@ import {LoginService} from '../../services/login.service';
 })
 export class HeaderToolboxComponent implements OnInit {
 
-  loggedInDisplay:string;
   email:string;
 
-  constructor(private loginService:LoginService,private router: Router){}
+  constructor(private router: Router, private localStorageService : LocalStorageService, private authService : AuthService){}
 
   ngOnInit(){
-    this.update();
-  }
 
-  update(){
-    this.email = localStorage.getItem('currentUserEmail');
-    let item:string = localStorage.getItem('loggedInDisplay');
-    this.loggedInDisplay = item!=null?item:"none";
+    this.email = LocalStorageService.email;
+    if(this.email == undefined) {
+      this.localStorageService.watchStorage().subscribe(response => {
+        switch (response) {
+          case 'email' :
+            this.email = LocalStorageService.getLocalStorageItem(response);
+            break;
+          case 'deleted' :
+            this.email = undefined;
+            break;
+        }
+      })
+    }
 
   }
 
   logout(){
-    this.update();
-    this.loginService.logout();
+    this.authService.logout().subscribe(response => {
+      console.log(response);
+      if (response.status == 200) {
+        this.localStorageService.clearLocalStorage();
+      }
+    });
   }
 
 }
