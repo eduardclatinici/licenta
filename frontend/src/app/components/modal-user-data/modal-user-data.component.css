@@ -7,6 +7,11 @@
   padding: 0;
 }
 
+
+.active {
+  background-color:#14b1ff !important;;
+}
+
 .modal-header>div>div{
   padding: 16px 0 16px 0;
   background-color: #0092dd;
@@ -28,41 +33,60 @@ h4{
   width: fit-content;
 }
 
-::-webkit-input-placeholder {
-  text-align: center;
+.modal-header a {
+  color: inherit;
+  text-decoration: none;
 }
 
-:-moz-placeholder { /* Firefox 18- */
-  text-align: center;
+/*::-webkit-input-placeholder {*/
+  /*text-align: center;*/
+/*}*/
+
+/*:-moz-placeholder { !* Firefox 18- *!*/
+  /*text-align: center;*/
+/*}*/
+
+/*::-moz-placeholder {  !* Firefox 19+ *!*/
+  /*text-align: center;*/
+/*}*/
+
+/*:-ms-input-placeholder {*/
+  /*text-align: center;*/
+/*}*/
+
+
+
+
+
+/*.login-image{*/
+  /*max-height: 200px;*/
+  /*position: relative;*/
+  /*left:50%;*/
+  /*transform: translateX(-50%);*/
+  /*margin-bottom: 10px;*/
+/*}*/
+
+/*#email, #password{*/
+  /*width: 100%;*/
+  /*text-align:center*/
+/*}*/
+
+/*.row>div{*/
+  /*margin-bottom: 15px;*/
+/*}*/
+
+
+.no-border-right {
+  border-right: 0 !important;
 }
 
-::-moz-placeholder {  /* Firefox 19+ */
-  text-align: center;
+
+.special-i {
+  margin-top: -60px;
+  margin-left: 10px;
 }
 
-:-ms-input-placeholder {
-  text-align: center;
+.display{
+  display: block !important;
+  opacity: 1;
 }
-
-
-
-
-
-.login-image{
-  max-height: 200px;
-  position: relative;
-  left:50%;
-  transform: translateX(-50%);
-  margin-bottom: 10px;
-}
-
-#email, #password{
-  width: 100%;
-  text-align:center
-}
-
-.row>div{
-  margin-bottom: 15px;
-}
-
-

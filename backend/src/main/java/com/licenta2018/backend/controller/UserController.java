@@ -15,7 +15,7 @@ public class UserController {
     @GetMapping("/auth-details")
     public Map getUserDetails(Authentication authentication){
         Map<String,Object>  map = new HashMap<>();
-        map.put("username",authentication.getPrincipal());
+        map.put("email",authentication.getPrincipal());
         map.put("authority",authentication.getAuthorities());
         return map;
     }

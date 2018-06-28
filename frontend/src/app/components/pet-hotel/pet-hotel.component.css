@@ -109,3 +109,13 @@ b{
     display: block;
   }
 }
+
+.counter {
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  background-color: #d3d3d3c9;
+  border: 1px solid white;
+  color: black;
+  padding:5px
+}

@@ -1,10 +1,12 @@
 <div class="modal-header">
   <div class="row row-no-margin w-100">
-    <div class="col-6 col-no-padding">
+    <div class="col-6 col-no-padding" (click)="currentState = 1"
+         [class]="currentState == 1 ? 'active col-6 col-no-padding' : 'col-6 col-no-padding'">
       <h4 class="login-title">Login</h4>
     </div>
-    <div class="col-6 col-no-padding">
-      <h4 class="register-title">Register</h4>
+    <div class="col-6 col-no-padding no-border-right" (click)="currentState = 2"
+         [class]="currentState == 2 ? 'active col-6 col-no-padding no-border-right' : 'col-6 col-no-padding no-border-right'">
+     <h4 class="register-title">Register</h4>
     </div>
   </div>
   <button type="button" class="close" aria-label="Close"
@@ -12,51 +14,170 @@
   </button>
 </div>
 <!--<form [formGroup]="myForm" (ngSubmit)="submitForm()">-->
+<!--<div class="modal-body" *ngIf="currentState == 1">-->
+<!--<img src="./assets/img/login/login.png" class="login-image">-->
+<!--&lt;!&ndash;<div class="form-group" id="type-selector">&ndash;&gt;-->
+<!--<div class="row row-no-margin">-->
+<!--<div class="col-8 offset-2 col-no-padding" id="error"><p>{{errorMessage}}</p></div>-->
+
+<!--<div class="col-8 offset-2 col-no-padding">-->
+<!--<input id="email" [ngClass]="{errorInput:errorMessage!=undefined}" type="text"-->
+<!--[(ngModel)]="loginModel.emailAddress" #emailLogin placeholder="Email"/>-->
+<!--</div>-->
+
+<!--<div [hidden]="isValidEmail(emailLogin.value) || emailLogin.value==''"-->
+<!--class="alert-danger col-8 offset-2">-->
+<!--<div class="col-8 offset-2 col-no-padding">Invalid email address format.</div>-->
+<!--</div>-->
+
+<!--<div class="col-8 offset-2 col-no-padding">-->
+<!--<input id="password" [ngClass]="{errorInput:errorMessage!=undefined}"-->
+<!--type="{{passwordType?'password':'text'}}" [(ngModel)]="loginModel.password" #password-->
+<!--placeholder="Password"/>-->
+<!--</div>-->
+<!--<div class="col-1 col-no-padding">-->
+<!--<img (click)="togglePassword()" src="./assets/img/login/eye-copy.png" srcset="./assets/img/login/eye-copy@2x.png 2x,-->
+<!--./assets/img/login/eye-copy@3x.png 3x" class="eye-copy">-->
+<!--</div>-->
+
+<!--<div class="col-1 offset-2 col-no-padding">-->
+<!--<label><input id="rememberme" name="rememberme" value="remember" type="checkbox"-->
+<!--[(ngModel)]="rememberMe"/></label>-->
+<!--</div>-->
+<!--<div class="col-7 col-no-padding">-->
+<!--<p>Remember me</p>-->
+<!--</div>-->
+
+<!--<div class="col-8 offset-2 col-no-padding">-->
+<!--<a routerLink="/forgot-password">Forgot password?</a>-->
+<!--</div>-->
+
+<!--</div>-->
+
+<!--</div>-->
+
 <div class="modal-body">
-  <img src="./assets/img/login/login.png" class="login-image">
-  <!--<div class="form-group" id="type-selector">-->
-  <div class="row row-no-margin">
-    <div class="col-8 offset-2 col-no-padding" id="error"><p>{{errorMessage}}</p></div>
+  <div class="tabbable panel login-form width-400">
 
-    <div class="col-8 offset-2 col-no-padding">
-      <input id="email" [ngClass]="{errorInput:errorMessage!=undefined}" type="text"
-             [(ngModel)]="loginModel.emailAddress" #emailLogin placeholder="Email"/>
-    </div>
+    <div class="tab-content panel-body">
+      <div class="tab-pane fade display" *ngIf="currentState == 1" id="basic-tab1">
+        <!--<form action="index.html">-->
+        <div class="text-center">
+          <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+          <h5 class="content-group">Login to your account
+            <small class="display-block">Your credentials</small>
+          </h5>
+        </div>
 
-    <div [hidden]="isValidEmail(emailLogin.value) || emailLogin.value==''"
-         class="alert-danger col-8 offset-2">
-      <div class="col-8 offset-2 col-no-padding">Invalid email address format.</div>
-    </div>
+        <div class="form-group has-feedback has-feedback-left">
+          <input type="text" class="form-control" placeholder="Email" name="username" required="required"
+                 [(ngModel)]="loginModel.emailAddress">
+          <div class="form-control-feedback">
+            <i class="special-i icon-user text-muted"></i>
+          </div>
+        </div>
 
-    <div class="col-8 offset-2 col-no-padding">
-      <input id="password" [ngClass]="{errorInput:errorMessage!=undefined}"
-             type="{{passwordType?'password':'text'}}" [(ngModel)]="loginModel.password" #password
-             placeholder="Password"/>
-    </div>
-    <div class="col-1 col-no-padding">
-      <img (click)="togglePassword()" src="./assets/img/login/eye-copy.png" srcset="./assets/img/login/eye-copy@2x.png 2x,
-      ./assets/img/login/eye-copy@3x.png 3x" class="eye-copy">
-    </div>
+        <div class="form-group has-feedback has-feedback-left">
+          <input type="password" class="form-control" placeholder="Password" name="password"
+                 required="required" [(ngModel)]="loginModel.password">
+          <div class="form-control-feedback">
+            <i class="special-i icon-lock2 text-muted"></i>
+          </div>
+        </div>
 
-    <div class="col-1 offset-2 col-no-padding">
-      <label><input id="rememberme" name="rememberme" value="remember" type="checkbox"
-                    [(ngModel)]="rememberMe"/></label>
-    </div>
-    <div class="col-7 col-no-padding">
-      <p>Remember me</p>
-    </div>
+        <div class="form-group login-options">
+          <div class="row">
+            <div class="col-sm-6">
+              <label class="checkbox-inline">
+                <div class="checker"><span [ngClass]="checked == true ?'checked': ''">
+                            <input type="checkbox" class="styled" checked="checked" [ngModel]="checked"
+                                   (change)="checked = !checked;"></span>
+                </div>
+                Remember
+              </label>
+            </div>
 
-    <div class="col-8 offset-2 col-no-padding">
-      <a routerLink="/forgot-password">Forgot password?</a>
-    </div>
+            <div class="col-sm-6 text-right">
+              <a href="login_password_recover.html">Forgot password?</a>
+            </div>
+          </div>
+        </div>
 
+        <div class="form-group">
+          <span *ngIf="error" class="error-message">{{errorMessage}}</span>
+          <button type="submit" class="btn bg-blue btn-block" (click)="login()">Login <i
+            class="icon-arrow-right14 position-right"></i></button>
+        </div>
+        <!--</form>-->
+
+        <span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
+          href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
+      </div>
+
+      <div class="tab-pane fade display" *ngIf="currentState == 2" id="basic-tab2">
+        <!--<form action="index.html">-->
+        <div class="text-center">
+          <div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
+          <h5 class="content-group">Create new account
+            <small class="display-block">All fields are required</small>
+          </h5>
+        </div>
+
+        <div class="form-group has-feedback has-feedback-left">
+          <input type="text" class="form-control" placeholder="Your Name" [(ngModel)]="registerName"
+                 [ngModelOptions]="{standalone: true}">
+          <div class="form-control-feedback">
+            <i class="special-i icon-profile text-muted"></i>
+          </div>
+        </div>
+
+        <div class="form-group has-feedback has-feedback-left">
+          <input type="text" class="form-control" placeholder="Your email" [(ngModel)]="registerEmail"
+                 [ngModelOptions]="{standalone: true}">
+          <div class="form-control-feedback">
+            <i class="icon-mention text-muted special-i"></i>
+          </div>
+        </div>
+
+        <div class="form-group has-feedback has-feedback-left">
+          <input type="password" class="form-control" placeholder="Create password"
+                 [(ngModel)]="registerPassword" [ngModelOptions]="{standalone: true}">
+          <div class="form-control-feedback">
+            <i class="icon-user-lock text-muted special-i"></i>
+          </div>
+        </div>
+
+        <div class="form-group has-feedback has-feedback-left">
+          <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="registerPhone"
+                 [ngModelOptions]="{standalone: true}">
+          <div class="form-control-feedback">
+            <i class="special-i icon-phone text-muted"></i>
+          </div>
+        </div>
+
+        <div class="content-divider text-muted form-group"><span>Additions</span></div>
+
+        <div class="form-group">
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" class="styled">
+              Accept <a href="#">terms of service</a>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn bg-indigo-400 btn-block" (click)="register()">Register <i
+          class="icon-circle-right2 position-right"></i></button>
+        <!--</form>-->
+      </div>
+    </div>
   </div>
-
 </div>
 
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Inchide</button>
-  <button class="btn btn-primary" (click)="login()" type="submit" >Login</button>
+  <!--<button class="btn btn-primary" (click)="login()" type="submit">Login</button>-->
 </div>
 
 

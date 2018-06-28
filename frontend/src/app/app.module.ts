@@ -27,6 +27,7 @@ import {AuthInterceptor} from './services/interceptor.service';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LocalStorageService} from './services/local-storage.service';
 import {SharedDataService} from './services/sharedData.service';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 
 
@@ -45,6 +46,7 @@ import {SharedDataService} from './services/sharedData.service';
     RangeDatePickerComponent,
     DaycareComponent,
     ModalUserDataComponent,
+    TasksComponent,
   ],
   imports: [
     FormsModule,

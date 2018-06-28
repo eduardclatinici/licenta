@@ -18,6 +18,7 @@ export class ModalUserDataComponent implements OnInit {
   passwordType: boolean = true;
   errorMessage: string;
   loginModel: LoginModel = new LoginModel();
+  currentState: number = 1;
 
   constructor(private authService: AuthService, private router: Router,
               private cookieService: CookieService, public activeModal: NgbActiveModal,
