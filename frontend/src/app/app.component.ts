@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./services/auth.service";
-import {UserDetailsModel} from "./models/userDetails.model";
+import {UserModel} from './models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import {UserDetailsModel} from "./models/userDetails.model";
 export class AppComponent implements OnInit{
   title = 'WoofWoof';
 
-  user: UserDetailsModel = new UserDetailsModel();
+  user: UserModel = new UserModel();
 
   constructor(private auth: AuthService) {
 

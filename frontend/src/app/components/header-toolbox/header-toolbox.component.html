@@ -18,8 +18,7 @@
       </a>
       <div class="dropdown-menu" aria-labelledby="toolboxDropdown">
         <a class="dropdown-item" href="#">Settings</a>
-        <!--<a class="dropdown-item" href="#" *ngIf="user.authority[0].authority == 'EMPLOYEE'">Tasks</a>-->
-        <a class="dropdown-item" routerLink="/tasks">Tasks</a>
+        <a class="dropdown-item" routerLink="/tasks" *ngIf="isEmployee()">Tasks</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#" (click)="logout()">Log out</a>
       </div>

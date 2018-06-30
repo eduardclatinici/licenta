@@ -1,8 +1,8 @@
 package com.licenta2018.backend.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.licenta2018.backend.domain.dto.LoginDTO;
-import com.licenta2018.backend.service.AppUserServiceImpl;
+import com.licenta2018.backend.domain.dto.UserDTO;
+import com.licenta2018.backend.service.UserServiceImpl;
 import com.licenta2018.backend.service.TokenAuthenticationService;
 
 import org.springframework.security.authentication.*;
@@ -21,9 +21,9 @@ import java.util.Collections;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-    private AppUserServiceImpl appUserService;
+    private UserServiceImpl appUserService;
 
-    public JWTLoginFilter(String url, AuthenticationManager authManager, AppUserServiceImpl appUserService) {
+    public JWTLoginFilter(String url, AuthenticationManager authManager, UserServiceImpl appUserService) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
         this.appUserService = appUserService;
@@ -33,13 +33,13 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     public Authentication attemptAuthentication(
             HttpServletRequest req, HttpServletResponse res)
             throws AuthenticationException, IOException, ServletException {
-        LoginDTO credentials = new ObjectMapper()
-                .readValue(req.getInputStream(), LoginDTO.class);
+        UserDTO credentials = new ObjectMapper()
+                .readValue(req.getInputStream(), UserDTO.class);
         Authentication authentication = null;
         try {
             authentication = getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            credentials.getEmailAddress(),
+                            credentials.getEmail(),
                             credentials.getPassword(),
                             Collections.emptyList()
                     )

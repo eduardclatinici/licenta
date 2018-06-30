@@ -22,19 +22,15 @@ import com.licenta2018.backend.domain.model.reservation.HotelReservation;
 
 @Entity
 @Table(name = "CLIENTS", uniqueConstraints={@UniqueConstraint(columnNames = {"email"})})
-public class Client {
+public class User {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE)
     private long id;
 
     @Column
-    @NotNull(message = "First name cannot be null")
-    private String firstName;
-
-    @Column
-    @NotNull(message = "Last name cannot be null")
-    private String lastName;
+    @NotNull(message = "Name cannot be null")
+    private String name;
 
     @Column
     @NotNull(message = "Email cannot be null")
@@ -45,52 +41,54 @@ public class Client {
     @NotNull(message = "phone number cannot be null")
     private String phoneNumber;
 
-    @NotNull(message = "Client details cannot be null")
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_systemDetails", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "systemUserDetails_id", referencedColumnName = "id"))
-    private SystemUserDetails systemUserDetails;
+    @Column
+    @NotNull(message = "User details cannot be null")
+    private String password;
 
     @Column
     @NotNull(message = "Role cannot be null")
     private String role;
 
-    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private Set<HotelReservation> roomReservations = new HashSet<>();
 
-    public Client() {
+    public User() {
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public SystemUserDetails getSystemUserDetails() {
-        return systemUserDetails;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setSystemUserDetails(SystemUserDetails systemUserDetails) {
-        this.systemUserDetails = systemUserDetails;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setRole(String role) {

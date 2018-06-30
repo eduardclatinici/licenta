@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.licenta2018.backend.service.AppUserServiceImpl;
+import com.licenta2018.backend.service.UserServiceImpl;
 import com.licenta2018.backend.service.TokenAuthenticationService;
 
 public class JWTAuthenticationFilter extends GenericFilterBean {
-    private AppUserServiceImpl appUserService;
-    public JWTAuthenticationFilter(AppUserServiceImpl appUserService) {
+    private UserServiceImpl appUserService;
+    public JWTAuthenticationFilter(UserServiceImpl appUserService) {
         this.appUserService = appUserService;
     }
 

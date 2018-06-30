@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {LocalStorageService} from '../../services/local-storage.service';
-import {UserDetailsModel} from "../../models/userDetails.model";
+import {UserModel} from '../../models/user.model';
 
 @Component({
   selector: 'app-header-toolbox',
@@ -11,8 +11,7 @@ import {UserDetailsModel} from "../../models/userDetails.model";
 })
 export class HeaderToolboxComponent implements OnInit {
 
-  email: string;
-  user: UserDetailsModel = new UserDetailsModel();
+  user: UserModel = new UserModel();
 
   constructor(private router: Router,
               private localStorageService: LocalStorageService,
@@ -23,49 +22,37 @@ export class HeaderToolboxComponent implements OnInit {
     this.authService.authDetails().subscribe(
       (response) => {
         this.user = response.body;
-        console.log(this.user);
         localStorage.removeItem('email');
         localStorage.setItem('email', this.user.email);
+        localStorage.removeItem('authority');
+        localStorage.setItem('authority', this.user.authority);
       },
       (error) => {
-        console.log('Error');
+        console.log('Error in header-toolbox');
       }
     );
 
     this.localStorageService.watchStorage().subscribe(response => {
       switch (response) {
-        case 'email' :
-          this.user.email = LocalStorageService.getLocalStorageItem(response);
+        case 'changed' :
+          this.user.email = LocalStorageService.getLocalStorageItem('email');
+          this.user.authority = LocalStorageService.getLocalStorageItem('authority');
           break;
         case 'deleted' :
-          this.user.email = undefined;
+          this.user = new UserModel();
           break;
-        default:
-          console.log(response);
       }
     })
   }
 
-  // this.email = LocalStorageService.email;
-  // if(this.email == undefined) {
-  //   this.localStorageService.watchStorage().subscribe(response => {
-  //     switch (response) {
-  //       case 'email' :
-  //         this.email = LocalStorageService.getLocalStorageItem(response);
-  //         break;
-  //       case 'deleted' :
-  //         this.email = undefined;
-  //         break;
-  //     }
-  //   })
-  // }
-
-
   logout() {
     this.authService.logout().subscribe(response => {
       this.localStorageService.clearLocalStorage();
-      this.user = new UserDetailsModel();
+      this.user = new UserModel();
     });
   }
 
+  isEmployee() {
+    return this.user.authority && (this.user.authority == 'EMPLOYEE' || this.user.authority == 'ADMIN')
+  }
 }

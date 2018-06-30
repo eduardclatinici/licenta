@@ -44,7 +44,7 @@ public class Employee {
     @NotNull(message = "phone number cannot be null")
     private String phoneNumber;
 
-    @NotNull(message = "Client details cannot be null")
+    @NotNull(message = "User details cannot be null")
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "user_systemDetails", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "SystemUserDetails_id", referencedColumnName = "id"))

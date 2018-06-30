@@ -67,3 +67,7 @@ li {
     padding: 12px;
   }
 }
+
+#navbarSupportedContent{
+  margin-left: 0!important;
+}

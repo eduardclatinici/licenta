@@ -7,33 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.licenta2018.backend.domain.model.user.Client;
-import com.licenta2018.backend.domain.repository.AppUserRepository;
+
+import com.licenta2018.backend.domain.model.user.User;
+import com.licenta2018.backend.domain.repository.UserRepository;
+import com.licenta2018.backend.domain.transformer.UserTransformer;
 import com.licenta2018.backend.exceptions.AppUserNotFoundException;
-import com.licenta2018.backend.service.interfaces.AppUserService;
+import com.licenta2018.backend.service.interfaces.UserService;
 
 @Service
-public class AppUserServiceImpl implements AppUserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    AppUserRepository repository;
+    UserRepository repository;
+    @Autowired
+    UserTransformer userTransformer;
 
-    public Client getByEmail(String email){
+    public User getByEmail(String email){
         return repository.findAppUserByEmail(email);
     }
 
     @Override
-    public void save(Client entity) {
+    public void save(User entity) {
         this.repository.save(entity);
     }
 
     @Override
-    public List<Client> getAll(){
+    public List<User> getAll(){
         return this.repository.findAll();
     }
 
     @Override
-    public List<Client> getAll(int pageSize, int pageNumber) {
+    public List<User> getAll(int pageSize, int pageNumber) {
         return repository.findAll(new PageRequest(pageNumber,pageSize)).getContent();
     }
 
@@ -43,8 +47,8 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public Client getById(Long id) throws AppUserNotFoundException {
-        Optional<Client> user = repository.findById(id);
+    public User getById(Long id) throws AppUserNotFoundException {
+        Optional<User> user = repository.findById(id);
         if(!user.isPresent())
             throw new AppUserNotFoundException("Employee not found");
         return user.get();

@@ -1,7 +1,7 @@
 package com.licenta2018.backend.configuration;
 
 
-import com.licenta2018.backend.service.AppUserServiceImpl;
+import com.licenta2018.backend.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,7 +33,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     UserDetailsService userDetailsService;
 
     @Autowired
-    AppUserServiceImpl appUserService;
+    UserServiceImpl appUserService;
 
     @Autowired
     LogoutSuccessHandler logoutHandler;
@@ -41,11 +41,12 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .anyRequest().authenticated()
                 .antMatchers(HttpMethod.POST, "/api/app-user/forgot-password").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/app-user/change-password").permitAll()
                 .antMatchers("/api/app-user/userdetails").hasAnyAuthority("ADMIN","USER", "EMPLOYEE")
-                .antMatchers("/api/app-user/user").hasAnyAuthority("USER")
+                .antMatchers("/api/app-user/user").hasAuthority("USER")
                 .antMatchers("/api/app-user/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .and().logout().logoutSuccessHandler(logoutHandler).invalidateHttpSession(false).permitAll()

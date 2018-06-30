@@ -28,6 +28,7 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {LocalStorageService} from './services/local-storage.service';
 import {SharedDataService} from './services/sharedData.service';
 import { TasksComponent } from './components/tasks/tasks.component';
+import {AdminGuard, EmployeeGuard, UserGuard} from './services/guard.service';
 
 
 
@@ -63,7 +64,7 @@ import { TasksComponent } from './components/tasks/tasks.component';
       }
     })
   ],
-  providers: [CookieService, NgbActiveModal, AuthService, LocalStorageService, SharedDataService,
+  providers: [CookieService, NgbActiveModal, AuthService, LocalStorageService, SharedDataService,AdminGuard,UserGuard,EmployeeGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
   entryComponents: [ModalReservationComponent, ModalUserDataComponent]

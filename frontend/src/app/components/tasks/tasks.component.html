@@ -1,215 +1,237 @@
-<div class="content">
-
+<div class="container">
   <!-- Task manager table -->
   <div class="panel panel-white">
     <div class="panel-heading">
       <h6 class="panel-title">Task manager</h6>
     </div>
 
-    <table class="table tasks-list table-lg">
+    <table class="table table-striped table-bordered tasks-list">
       <thead>
       <tr>
-        <th width="2%">#</th>
-        <th width="48%">Task Description</th>
-        <th width="30%">Date & Time</th>
-        <th width="18%">Photo</th>
-        <th width="2%">Action</th>
+        <th scope="col" class="text-center">Descriere</th>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col" class="text-center">Ora</th>
+        <th scope="col" class="text-center">Poza</th>
+        <th scope="col" class="text-center">Actiune</th>
         <!--<th class="text-center text-muted" style="width: 30px;"><i class="icon-checkmark3"></i></th>-->
       </tr>
       </thead>
       <tbody>
       <tr>
-        <td>#1</td>
         <td>
-          <div class="text-muted">Feed the dog.</div>
+          <div class="text-muted">Mancare</div>
         </td>
         <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="17 January 08:00">
-          </div>
+          <div class="text-muted">H7</div>
         </td>
         <td>
-              <input type="file" class="file-styled">
+          <!--<div class="input-group input-group-transparent">-->
+            <!--<input type="text" class="form-control datepicker" value="08:00">-->
+          <!--</div>-->
+          <div class="text-muted">08:00</div>
+        </td>
+        <td>
+          <label for="upload">
+            <span class="glyphicon glyphicon-ice-lolly pointer" aria-hidden="true"></span>
+            <input type="file" id="upload" style="display: none">
+          </label>
         </td>
         <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
+          <!--<input type="file">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
         </td>
       </tr>
 
-      <tr>
-        <td>#2</td>
-        <td>
-          <div class="text-muted">When I hear the buzz of the little world among the stalks..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="17 January 09:15">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Mancare</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="09:15">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#3</td>
-        <td>
-          <div class="text-muted">Insects and flies, then I feel the presence of the Almighty..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="17 January 13:50">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Plimbare</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="13:50">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#4</td>
-        <td>
-          <div class="text-muted">Who formed us in his own image, and the breath of that universal..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="17 January 14:45">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Plimbare</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="14:45">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#5</td>
-        <td>
-          <div class="text-muted">My friend, when darkness overspreads my eyes, and heaven..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="17 January 18:30">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Mancare</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="18:30">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#6</td>
-        <td>
-          <div class="text-muted">Seem to dwell in my soul and absorb its power, like the form..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="18 January 07:30">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Plimbare</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="07:30">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#7</td>
-        <td>
-          <div class="text-muted">I sink under the weight of the splendour of these visions..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="18 January 12:30">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Mancare</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="12:30">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#8</td>
-        <td>
-          <div class="text-muted">Far far away, behind the word mountains, far from the..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="18 January 15:15">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Asistenta</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="15:15">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#9</td>
-        <td>
-          <div class="text-muted">Countries Vokalia and Consonantia, there live the blind..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="19 January 08:30">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Asistenta</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H7</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="08:30">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td>#10</td>
-        <td>
-          <div class="text-muted">A small river named Duden flows by their place and supplies it..</div>
-        </td>
-        <td>
-          <div class="input-group input-group-transparent">
-            <div class="input-group-addon"><i class="icon-calendar2 position-left"></i></div>
-            <input type="text" class="form-control datepicker" value="19 January 12:30">
-          </div>
-        </td>
-        <td>
-          <input type="file" class="file-styled">
-        </td>
-        <td class="text-center">
-          <i class="icon-checkmark3 pointer" title="Submit"></i>
-        </td>
-      </tr>
+      <!--<tr>-->
+        <!--<td>-->
+          <!--<div class="text-muted">Plimbare</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<div class="text-muted">H9</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="12:30">&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<div class="text-muted">08:00</div>-->
+        <!--</td>-->
+        <!--<td>-->
+          <!--<input type="file" class="file-styled">-->
+        <!--</td>-->
+        <!--<td class="text-center">-->
+          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+        <!--</td>-->
+      <!--</tr>-->
       </tbody>
     </table>
   </div>
   <!-- /task manager table -->
-
 </div>

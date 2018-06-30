@@ -2,11 +2,11 @@
   <div class="row row-no-margin w-100">
     <div class="col-6 col-no-padding" (click)="currentState = 1"
          [class]="currentState == 1 ? 'active col-6 col-no-padding' : 'col-6 col-no-padding'">
-      <h4 class="login-title">Login</h4>
+      <h4 class="login-title">Autentificare</h4>
     </div>
     <div class="col-6 col-no-padding no-border-right" (click)="currentState = 2"
          [class]="currentState == 2 ? 'active col-6 col-no-padding no-border-right' : 'col-6 col-no-padding no-border-right'">
-     <h4 class="register-title">Register</h4>
+     <h4 class="register-title">Inregistrare</h4>
     </div>
   </div>
   <button type="button" class="close" aria-label="Close"
@@ -22,7 +22,7 @@
 
 <!--<div class="col-8 offset-2 col-no-padding">-->
 <!--<input id="email" [ngClass]="{errorInput:errorMessage!=undefined}" type="text"-->
-<!--[(ngModel)]="loginModel.emailAddress" #emailLogin placeholder="Email"/>-->
+<!--[(ngModel)]="registerModel.email" #emailLogin placeholder="Email"/>-->
 <!--</div>-->
 
 <!--<div [hidden]="isValidEmail(emailLogin.value) || emailLogin.value==''"-->
@@ -32,7 +32,7 @@
 
 <!--<div class="col-8 offset-2 col-no-padding">-->
 <!--<input id="password" [ngClass]="{errorInput:errorMessage!=undefined}"-->
-<!--type="{{passwordType?'password':'text'}}" [(ngModel)]="loginModel.password" #password-->
+<!--type="{{passwordType?'password':'text'}}" [(ngModel)]="registerModel.password" #password-->
 <!--placeholder="Password"/>-->
 <!--</div>-->
 <!--<div class="col-1 col-no-padding">-->
@@ -64,21 +64,22 @@
         <!--<form action="index.html">-->
         <div class="text-center">
           <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
-          <h5 class="content-group">Login to your account
-            <small class="display-block">Your credentials</small>
+          <h5 class="content-group">Intra in contul tau
+            <small class="display-block">Credentialele tale</small>
+            <span *ngIf="errorMessage" class="error-message display-block">{{errorMessage}}</span>
           </h5>
         </div>
 
         <div class="form-group has-feedback has-feedback-left">
           <input type="text" class="form-control" placeholder="Email" name="username" required="required"
-                 [(ngModel)]="loginModel.emailAddress">
+                 [(ngModel)]="loginModel.email">
           <div class="form-control-feedback">
             <i class="special-i icon-user text-muted"></i>
           </div>
         </div>
 
         <div class="form-group has-feedback has-feedback-left">
-          <input type="password" class="form-control" placeholder="Password" name="password"
+          <input type="password" class="form-control" placeholder="Parola" name="password"
                  required="required" [(ngModel)]="loginModel.password">
           <div class="form-control-feedback">
             <i class="special-i icon-lock2 text-muted"></i>
@@ -89,28 +90,27 @@
           <div class="row">
             <div class="col-sm-6">
               <label class="checkbox-inline">
-                <div class="checker"><span [ngClass]="checked == true ?'checked': ''">
-                            <input type="checkbox" class="styled" checked="checked" [ngModel]="checked"
-                                   (change)="checked = !checked;"></span>
+                <div class="checker"><span [ngClass]="rememberMe == true ?'checked': ''">
+                            <input type="checkbox" class="styled" checked="checked" [ngModel]="rememberMe"
+                                   (change)="rememberMe = !rememberMe;"></span>
                 </div>
-                Remember
+                Tine-ma minte!
               </label>
             </div>
 
             <div class="col-sm-6 text-right">
-              <a href="login_password_recover.html">Forgot password?</a>
+              <a href="login_password_recover.html">Am uitat parola</a>
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <span *ngIf="error" class="error-message">{{errorMessage}}</span>
-          <button type="submit" class="btn bg-blue btn-block" (click)="login()">Login <i
+          <button type="submit" class="btn bg-blue btn-block" (click)="login()">Autentificare <i
             class="icon-arrow-right14 position-right"></i></button>
         </div>
         <!--</form>-->
 
-        <span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a
+        <span class="help-block text-center no-margin">Continuand, confirmati ca ati citit <a
           href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
       </div>
 
@@ -118,13 +118,13 @@
         <!--<form action="index.html">-->
         <div class="text-center">
           <div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
-          <h5 class="content-group">Create new account
-            <small class="display-block">All fields are required</small>
+          <h5 class="content-group">Creare cont nou
+            <small class="display-block">Toate campurile sunt obligatorii</small>
           </h5>
         </div>
 
         <div class="form-group has-feedback has-feedback-left">
-          <input type="text" class="form-control" placeholder="Your Name" [(ngModel)]="registerName"
+          <input type="text" class="form-control" placeholder="Nume si prenume" [(ngModel)]="registerModel.name"
                  [ngModelOptions]="{standalone: true}">
           <div class="form-control-feedback">
             <i class="special-i icon-profile text-muted"></i>
@@ -132,7 +132,7 @@
         </div>
 
         <div class="form-group has-feedback has-feedback-left">
-          <input type="text" class="form-control" placeholder="Your email" [(ngModel)]="registerEmail"
+          <input type="text" class="form-control" placeholder="Email" [(ngModel)]="registerModel.email"
                  [ngModelOptions]="{standalone: true}">
           <div class="form-control-feedback">
             <i class="icon-mention text-muted special-i"></i>
@@ -140,34 +140,34 @@
         </div>
 
         <div class="form-group has-feedback has-feedback-left">
-          <input type="password" class="form-control" placeholder="Create password"
-                 [(ngModel)]="registerPassword" [ngModelOptions]="{standalone: true}">
+          <input type="password" class="form-control" placeholder="Parola"
+                 [(ngModel)]="registerModel.password" [ngModelOptions]="{standalone: true}">
           <div class="form-control-feedback">
             <i class="icon-user-lock text-muted special-i"></i>
           </div>
         </div>
 
         <div class="form-group has-feedback has-feedback-left">
-          <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="registerPhone"
+          <input type="text" class="form-control" placeholder="Numar de telefon" [(ngModel)]="registerModel.phone"
                  [ngModelOptions]="{standalone: true}">
           <div class="form-control-feedback">
             <i class="special-i icon-phone text-muted"></i>
           </div>
         </div>
 
-        <div class="content-divider text-muted form-group"><span>Additions</span></div>
+        <div class="content-divider text-muted form-group"><span>Aditionale</span></div>
 
         <div class="form-group">
 
           <div class="checkbox">
             <label>
               <input type="checkbox" class="styled">
-              Accept <a href="#">terms of service</a>
+              Accept <a href="#">termenii si conditiile de utilizare</a>
             </label>
           </div>
         </div>
 
-        <button type="submit" class="btn bg-indigo-400 btn-block" (click)="register()">Register <i
+        <button type="submit" class="btn bg-blue btn-block" (click)="register()">Inregistrare <i
           class="icon-circle-right2 position-right"></i></button>
         <!--</form>-->
       </div>

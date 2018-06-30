@@ -11,11 +11,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.licenta2018.backend.domain.model.user.Client;
+import com.licenta2018.backend.domain.model.user.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -44,7 +43,8 @@ public class TokenAuthenticationService {
         HEADER_STRING = headerString;
     }
 
-    public static void addAuthentication(HttpServletResponse res, String email, User user) throws IOException {
+    public static void addAuthentication(HttpServletResponse res, String email, org.springframework.security.core
+            .userdetails.User user) throws IOException {
         String JWT = Jwts.builder()
                 .setSubject(email)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
@@ -61,22 +61,22 @@ public class TokenAuthenticationService {
 
     }
 
-    public static Authentication getAuthentication(HttpServletRequest request, AppUserServiceImpl appUserService) {
+    public static Authentication getAuthentication(HttpServletRequest request, UserServiceImpl appUserService) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
-            String emailAddress = Jwts.parser()
+            String email = Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
-            Client client = appUserService.getByEmail(emailAddress);
-            if("admin@woofwoof.com".equals(emailAddress)){
-                return new UsernamePasswordAuthenticationToken(emailAddress, null,
+            User user = appUserService.getByEmail(email);
+            if("admin@woofwoof.com".equals(email)){
+                return new UsernamePasswordAuthenticationToken(email, null,
                         Arrays.asList(new SimpleGrantedAuthority("ADMIN") ));
             }
-            return emailAddress != null && client !=null ?
-                    new UsernamePasswordAuthenticationToken(emailAddress, null,
-                            Arrays.asList(new SimpleGrantedAuthority(client.getRole()) )) :
+            return email != null && user !=null ?
+                    new UsernamePasswordAuthenticationToken(email, null,
+                            Arrays.asList(new SimpleGrantedAuthority(user.getRole()) )) :
                     null;
         }
         return null;
