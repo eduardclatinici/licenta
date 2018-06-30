@@ -54,6 +54,8 @@ public class HotelReservation {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public HotelReservation() {}
+
     public HotelReservation(LocalDate startDate, LocalDate endDate, String roomType, int numberOfGuests, Status status) {
         this.startDate = startDate;
         this.endDate = endDate;
@@ -62,8 +64,16 @@ public class HotelReservation {
         this.status = status;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
     public void setEndDate(LocalDate endDate) {

@@ -3,13 +3,18 @@ package com.licenta2018.backend.rooms;
 import com.google.common.collect.ImmutableMap;
 import com.licenta2018.backend.domain.dto.BookedDaysOfMonth;
 import com.licenta2018.backend.domain.dto.FreeRoomsDto;
+import com.licenta2018.backend.domain.model.reservation.HotelReservation;
 import com.licenta2018.backend.domain.repository.HotelReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
 @Component
 public class HotelRoomsResolver {
@@ -31,6 +36,10 @@ public class HotelRoomsResolver {
     }
 
     public BookedDaysOfMonth getFullyBookedDaysOfMonth(int month) {
+        LocalDate now = LocalDate.now();
+        LocalDate monthStart = now.with(firstDayOfMonth());
+        LocalDate monthEnd = now.with(lastDayOfMonth());
+        List<HotelReservation> hotelReservationsDuringMonth = hotelReservationRepository.findAllReservationsDuringMonth(monthStart, monthEnd);
         return null;
     }
 
