@@ -1,5 +1,6 @@
 package com.licenta2018.backend.service;
 
+import com.licenta2018.backend.domain.dto.BookedDaysOfMonth;
 import com.licenta2018.backend.domain.dto.FreeRoomsDto;
 import com.licenta2018.backend.domain.model.reservation.HotelReservation;
 import com.licenta2018.backend.domain.model.user.User;
@@ -30,6 +31,11 @@ public class HotelReservationServiceImpl implements HotelReservationService {
     @Override
     public List<FreeRoomsDto> getAvailableRoomsToday() {
         return hotelRoomsResolver.getAvailableRoomsToday();
+    }
+
+    @Override
+    public BookedDaysOfMonth getFullyBookedDaysOfMonth(int month) {
+        return hotelRoomsResolver.getFullyBookedDaysOfMonth(month);
     }
 
     @Override

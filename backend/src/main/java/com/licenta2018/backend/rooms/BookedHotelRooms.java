@@ -3,9 +3,9 @@ package com.licenta2018.backend.rooms;
 public class BookedHotelRooms {
 
     private String roomType;
-    private int count;
+    private long count;
 
-    public BookedHotelRooms(String roomType, int count) {
+    public BookedHotelRooms(String roomType, long count) {
         this.roomType = roomType;
         this.count = count;
     }
@@ -14,7 +14,7 @@ public class BookedHotelRooms {
         return roomType;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 }
