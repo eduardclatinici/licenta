@@ -29,7 +29,7 @@ public class HotelReservationController {
     @Autowired
     private HotelReservationTransformer hotelReservationTransformer;
 
-    @PostMapping("/hotelReservation")
+    @PostMapping("/hotelReservations")
     public ResponseEntity makeReservation(@RequestBody HotelReservationDTO hotelReservationDTO) {
         hotelReservationService.save(hotelReservationTransformer.toModel(hotelReservationDTO));
         return new ResponseEntity(OK);
