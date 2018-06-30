@@ -1,27 +1,34 @@
 package com.licenta2018.backend.domain.dto;
 
 public class HotelReservationDTO {
-    private String startDate;
-    private String endDate;
+    private DateDTO startDate;
+    private DateDTO endDate;
     private String roomType;
-    private String numberOfGuests;
+    private int numberOfGuests;
 
     public HotelReservationDTO(){
     }
 
-    public String getStartDate() {
+    public HotelReservationDTO(DateDTO startDate, DateDTO endDate, String roomType, int numberOfGuests) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.roomType = roomType;
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public DateDTO getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(DateDTO startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public DateDTO getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(DateDTO endDate) {
         this.endDate = endDate;
     }
 
@@ -33,11 +40,11 @@ public class HotelReservationDTO {
         this.roomType = roomType;
     }
 
-    public String getNumberOfGuests() {
+    public int getNumberOfGuests() {
         return numberOfGuests;
     }
 
-    public void setNumberOfGuests(String numberOfGuests) {
+    public void setNumberOfGuests(int numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
     }
 }

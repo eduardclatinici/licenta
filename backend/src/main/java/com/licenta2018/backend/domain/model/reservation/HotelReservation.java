@@ -1,10 +1,11 @@
 package com.licenta2018.backend.domain.model.reservation;
 
-import static javax.persistence.GenerationType.*;
+import com.licenta2018.backend.domain.model.user.User;
 
-import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,8 +15,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.time.LocalDate;
 
-import com.licenta2018.backend.domain.model.user.User;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name = "HOTEL_RESERVATIONS")
@@ -27,11 +30,11 @@ public class HotelReservation {
 
     @Column
     @NotNull(message = "Start date cannot be null (inclusive)")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column
     @NotNull(message = "End date cannot be null (exclusive)")
-    private Date endDate;
+    private LocalDate endDate;
 
     @Column
     @NotNull(message = "Room type cannot be null")
@@ -47,14 +50,23 @@ public class HotelReservation {
     @JoinColumn(name = "CLIENT_ID")
     private User user;
 
-    public HotelReservation() {
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public HotelReservation(LocalDate startDate, LocalDate endDate, String roomType, int numberOfGuests, Status status) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.roomType = roomType;
+        this.numberOfGuests = numberOfGuests;
+        this.status = status;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -64,5 +76,13 @@ public class HotelReservation {
 
     public void setNumberOfGuests(int numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public enum Status {
+        PENDING, ACTIVE, COMPLETED
     }
 }
