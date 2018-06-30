@@ -38,7 +38,10 @@ public class HotelRoomsResolver {
         List<BookedHotelRooms> bookedHotelRooms = hotelReservationRepository.findBookedRoomsCount();
         return hotelRooms.keySet()
                 .stream()
-                .map(roomType -> new FreeRoomsDto(roomType, hotelRooms.get(roomType) - getCountOfBookedRoomsByType(roomType, bookedHotelRooms)))
+                .map(roomType -> {
+                    long totalRoomByType = hotelRooms.get(roomType);
+                    return new FreeRoomsDto(roomType, totalRoomByType - getCountOfBookedRoomsByType(roomType, bookedHotelRooms), totalRoomByType);
+                })
                 .collect(Collectors.toList());
     }
 
@@ -47,6 +50,6 @@ public class HotelRoomsResolver {
                 .filter(room -> roomType.equals(room.getRoomType()))
                 .findFirst()
                 .map(BookedHotelRooms::getCount)
-                .orElse(0l);
+                .orElse(0L);
     }
 }

@@ -4,10 +4,12 @@ public class FreeRoomsDto {
 
     private String roomType;
     private long availableRooms;
+    private long totalRooms;
 
-    public FreeRoomsDto(String roomType, long availableRooms) {
+    public FreeRoomsDto(String roomType, long availableRooms, long totalRooms) {
         this.roomType = roomType;
         this.availableRooms = availableRooms;
+        this.totalRooms = totalRooms;
     }
 
     public String getRoomType() {
@@ -24,5 +26,13 @@ public class FreeRoomsDto {
 
     public void setAvailableRooms(long availableRooms) {
         this.availableRooms = availableRooms;
+    }
+
+    public long getTotalRooms() {
+        return totalRooms;
+    }
+
+    public void setTotalRooms(long totalRooms) {
+        this.totalRooms = totalRooms;
     }
 }
