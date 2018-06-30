@@ -15,4 +15,6 @@ public interface HotelReservationRepository extends JpaRepository<HotelReservati
            "FROM HotelReservation r WHERE r.status = \'ACTIVE\' AND r.startDate = CURRENT_DATE " +
            "GROUP BY r.roomType")
     List<BookedHotelRooms> findBookedRoomsCount();
+
+
 }
