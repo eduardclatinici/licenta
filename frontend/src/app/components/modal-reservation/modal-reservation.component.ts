@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {DateRange} from '../../models/dateRange.model';
 import {HotelReservationModel} from '../../models/hotelReservation.model';
 import {ReservationService} from '../../services/reservation.service';
-import {ToasterService} from 'angular5-toaster/dist';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class ModalReservationComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private reservationService : ReservationService,
-    private toasterService: ToasterService
+    private toastr : ToastrService
   ) {
       this.createForm();
   }
@@ -54,10 +54,10 @@ export class ModalReservationComponent implements OnInit {
 
     this.reservationService.createReservation(this.reservationModel).subscribe(response => {
       this.activeModal.close();
-        this.toasterService.pop('success', 'Succes', 'Rezervare creata cu succes');
+      this.toastr.success('Rezervarea a fost creata', 'Succes');
     },
     err => {
-        this.toasterService.pop('error', 'Eroare', 'Nu s-a putut crea rezervarea');
+      this.toastr.error('Va rugam incercati mai tarziu', 'Eroare');
     });
 
     this.activeModal.close(this.myForm.value);

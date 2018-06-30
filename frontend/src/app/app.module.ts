@@ -29,7 +29,9 @@ import {LocalStorageService} from './services/local-storage.service';
 import {SharedDataService} from './services/sharedData.service';
 import { TasksComponent } from './components/tasks/tasks.component';
 import {AdminGuard, EmployeeGuard, UserGuard} from './services/guard.service';
-import {ToasterModule} from 'angular5-toaster/dist';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ReservationService} from './services/reservation.service';
 
 
 
@@ -52,7 +54,6 @@ import {ToasterModule} from 'angular5-toaster/dist';
   ],
   imports: [
     FormsModule,
-    ToasterModule,
     ReactiveFormsModule,
     BrowserModule,
     routes,
@@ -64,9 +65,11 @@ import {ToasterModule} from 'angular5-toaster/dist';
         tokenGetter: () => {return LocalStorageService.getAuthorizationToken()},
         whitelistedDomains: ['http://localhost:9999']
       }
-    })
+    }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [CookieService, NgbActiveModal, AuthService, LocalStorageService, SharedDataService,AdminGuard,UserGuard,EmployeeGuard,
+  providers: [CookieService, NgbActiveModal, AuthService, LocalStorageService, SharedDataService,AdminGuard,UserGuard,EmployeeGuard, ReservationService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
   entryComponents: [ModalReservationComponent, ModalUserDataComponent]
