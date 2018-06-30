@@ -25,6 +25,7 @@ repositories {
 
 
 dependencies {
+	compile group: 'com.google.guava', name: 'guava', version: '24.1-jre'
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.postgresql:postgresql')

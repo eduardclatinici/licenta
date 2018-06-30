@@ -41,6 +41,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/availableRoomsToday").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .anyRequest().authenticated()
                 .antMatchers(HttpMethod.POST, "/api/app-user/forgot-password").permitAll()
@@ -48,6 +49,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/app-user/userdetails").hasAnyAuthority("ADMIN","USER", "EMPLOYEE")
                 .antMatchers("/api/app-user/user").hasAuthority("USER")
                 .antMatchers("/api/app-user/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/hotelReservation").hasAnyAuthority("USER", "EMPLOYEE")
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .and().logout().logoutSuccessHandler(logoutHandler).invalidateHttpSession(false).permitAll()
                 .and()
