@@ -1,5 +1,4 @@
 <div class="container">
-  <!-- Task manager table -->
   <div class="panel panel-white">
     <div class="panel-heading">
       <h6 class="panel-title">Task manager</h6>
@@ -8,230 +7,50 @@
     <table class="table table-striped table-bordered tasks-list">
       <thead>
       <tr>
-        <th scope="col" class="text-center">Descriere</th>
         <th scope="col" class="text-center">#</th>
+        <th scope="col" class="text-center">Descriere</th>
+        <th scope="col" class="text-center">Loc.</th>
         <th scope="col" class="text-center">Ora</th>
         <th scope="col" class="text-center">Poza</th>
-        <th scope="col" class="text-center">Actiune</th>
-        <!--<th class="text-center text-muted" style="width: 30px;"><i class="icon-checkmark3"></i></th>-->
+        <th scope="col" class="text-center">Actiuni</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>
-          <div class="text-muted">Mancare</div>
+      <tr *ngFor="let task of taskArray">
+        <td class="text-center">
+          <div class="text-muted">{{task.id}}</div>
         </td>
-        <td>
-          <div class="text-muted">H7</div>
+        <td class="text-center">
+          <div class="text-muted" style="display: inline-block; margin-right: 5px">{{task.description}}</div>
+          <i class="icon-help pointer"></i>
         </td>
-        <td>
-          <!--<div class="input-group input-group-transparent">-->
-            <!--<input type="text" class="form-control datepicker" value="08:00">-->
-          <!--</div>-->
-          <div class="text-muted">08:00</div>
+        <td class="text-center">
+          <div class="text-muted">{{task.room}}</div>
         </td>
-        <td>
-          <label for="upload">
-            <span class="glyphicon glyphicon-ice-lolly pointer" aria-hidden="true"></span>
-            <input type="file" id="upload" style="display: none">
+        <td class="text-center">
+          <div class="text-muted">{{task.time}}</div>
+        </td>
+        <td class="text-center">
+          <label>
+            <span *ngIf="!file || task.id != taskId" class="icon-file-upload pointer" aria-hidden="true"></span>
+            <span *ngIf="file && task.id == taskId" class="icon-checkmark pointer" aria-hidden="true"></span>
+            <input name="file" type="file" id="upload" (change)="onChangeFile($event);setTaskId(task.id)" style="display: none">
+
           </label>
         </td>
         <td class="text-center">
-          <!--<input type="file">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
+          <div class="row row-no-margin">
+            <div class="col-6 col-no-padding">
+              <i class="icon-checkmark-circle pointer" title="Submit"></i>
+            </div>
+            <div class="col-6 col-no-padding">
+              <i class="icon-warning pointer"></i>
+            </div>
+          </div>
         </td>
       </tr>
 
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Mancare</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="09:15">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Plimbare</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="13:50">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Plimbare</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="14:45">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Mancare</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="18:30">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Plimbare</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="07:30">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Mancare</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="12:30">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Asistenta</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="15:15">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Asistenta</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H7</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="08:30">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<div class="text-muted">Plimbare</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<div class="text-muted">H9</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--&lt;!&ndash;<div class="input-group input-group-transparent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" class="form-control datepicker" value="12:30">&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div class="text-muted">08:00</div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<input type="file" class="file-styled">-->
-        <!--</td>-->
-        <!--<td class="text-center">-->
-          <!--<i class="icon-checkmark3 pointer" title="Submit"></i>-->
-        <!--</td>-->
-      <!--</tr>-->
       </tbody>
     </table>
   </div>
-  <!-- /task manager table -->
 </div>

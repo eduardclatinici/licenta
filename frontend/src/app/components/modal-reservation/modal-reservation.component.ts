@@ -3,6 +3,9 @@ import {$} from 'jquery';
 import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DateRange} from '../../models/dateRange.model';
+import {HotelReservationModel} from '../../models/hotelReservation.model';
+import {ReservationService} from '../../services/reservation.service';
+import {ToasterService} from 'angular5-toaster/dist';
 
 
 @Component({
@@ -12,10 +15,12 @@ import {DateRange} from '../../models/dateRange.model';
 })
 export class ModalReservationComponent implements OnInit {
 
+  reservationModel : HotelReservationModel = new HotelReservationModel();
+
   @Input() selectedRoomOption : String;
   private roomOptions = ["Economy (Dog)","Regular (Dog)","Vip (Dog)","Economy (Cat)","Regular (Cat)","Vip (Cat)"];
 
-  selectedGuestOption : Number = 1;
+  selectedGuestOption : number = 1;
   private guestOptions = [1,2,3,4];
 
   private startDate : NgbDateStruct;
@@ -27,7 +32,9 @@ export class ModalReservationComponent implements OnInit {
   myForm: FormGroup;
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private reservationService : ReservationService,
+    private toasterService: ToasterService
   ) {
       this.createForm();
   }
@@ -40,10 +47,18 @@ export class ModalReservationComponent implements OnInit {
     });
   }
   private submitForm() {
-    this.myForm.controls['roomType'].setValue(this.selectedRoomOption);
-    this.myForm.controls['numberOfGuests'].setValue(this.selectedGuestOption);
-    this.myForm.controls['startDate'].setValue(this.startDate);
-    this.myForm.controls['endDate'].setValue(this.endDate);
+    this.reservationModel.roomOption = this.selectedRoomOption;
+    this.reservationModel.guestsNumber = this.selectedGuestOption;
+    this.reservationModel.startDate = this.startDate;
+    this.reservationModel.endDate = this.endDate;
+
+    this.reservationService.createReservation(this.reservationModel).subscribe(response => {
+      this.activeModal.close();
+        this.toasterService.pop('success', 'Succes', 'Rezervare creata cu succes');
+    },
+    err => {
+        this.toasterService.pop('error', 'Eroare', 'Nu s-a putut crea rezervarea');
+    });
 
     this.activeModal.close(this.myForm.value);
   }
