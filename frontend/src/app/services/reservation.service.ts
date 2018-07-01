@@ -14,7 +14,7 @@ export class ReservationService {
   }
 
   getAvailableRoomsTomorrow() : Observable<HttpResponse<any>>{
-    let url = '/api/availableRoomsToday';
+    let url = '/api/availableRoomsTomorrow';
     return this.http.get(url,{observe:'response'});
   }
 }

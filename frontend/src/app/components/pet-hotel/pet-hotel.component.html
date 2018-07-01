@@ -24,7 +24,7 @@
     </div>
     <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(1)">
       <img src="./assets/img/pet-hotel/dog-regular.jpg" alt="dog-regular image" class="img-thumbnail">
-      <div class="counter">6/39</div>
+      <div class="counter">{{getNumberOfRoomsByType(1)}}</div>
       <div class="imgBtn">
         <p>Regular</p>
         <p class="price">70 lei</p>
@@ -38,7 +38,7 @@
     </div>
     <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(2)">
       <img src="./assets/img/pet-hotel/dog-vip.jpg" alt="dog-vip image" class="img-thumbnail">
-      <div class="counter">6/39</div>
+      <div class="counter">{{getNumberOfRoomsByType(2)}}</div>
       <div class="imgBtn">
         <p>Vip</p>
         <p class="price">100 lei</p>
@@ -57,7 +57,7 @@
 
     <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(3)">
       <img src="./assets/img/pet-hotel/cat-economy.jpg" alt="cat-economy image" class="img-thumbnail">
-      <div class="counter">6/39</div>
+      <div class="counter">{{getNumberOfRoomsByType(3)}}</div>
       <div class="imgBtn">
         <p>Economy</p>
         <p class="price">40 lei</p>
@@ -73,7 +73,7 @@
     </div>
     <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(4)">
       <img src="./assets/img/pet-hotel/cat-regular.jpg" alt="cat-regular image" class="img-thumbnail">
-      <div class="counter">6/39</div>
+      <div class="counter">{{getNumberOfRoomsByType(4)}}</div>
       <div class="imgBtn">
         <p>Regular</p>
         <p class="price">60 lei</p>
@@ -86,7 +86,7 @@
     </div>
     <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(5)">
       <img src="./assets/img/pet-hotel/cat-vip.jpg" alt="cat-vip image" class="img-thumbnail">
-      <div class="counter">6/39</div>
+      <div class="counter">{{getNumberOfRoomsByType(5)}}</div>
       <div class="imgBtn">
         <p>Vip</p>
         <p class="price">90 lei</p>
