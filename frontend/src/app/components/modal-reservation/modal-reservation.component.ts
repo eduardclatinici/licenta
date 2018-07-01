@@ -14,6 +14,8 @@ import {ReservationService} from '../../services/reservation.service';
 })
 export class ModalReservationComponent implements OnInit {
 
+  currentState:number=0;
+
   reservationModel : HotelReservationModel = new HotelReservationModel();
 
   @Input() selectedRoomType : String;
@@ -51,13 +53,13 @@ export class ModalReservationComponent implements OnInit {
     this.reservationModel.endDate = this.endDate;
 
     this.reservationService.createReservation(this.reservationModel).subscribe(response => {
-      this.activeModal.close();
+      this.currentState=1;
     },
     err => {
-      console.log("eroare in crearea rezervarii")
+      this.currentState=2;
+      console.log(err)
     });
 
-    this.activeModal.close(this.myForm.value);
   }
 
   private getOtherOptions(){

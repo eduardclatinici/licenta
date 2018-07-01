@@ -9,7 +9,7 @@
   <div class="row row-no-margin">
     <div class="col-6 col-md col-no-padding selection" (click)="reservationForm(0)">
       <img src="./assets/img/pet-hotel/dog-economy.jpg" alt="dog-economy image" class="img-thumbnail">
-      <div class="counter">6/39</div>
+      <div class="counter">{{getNumberOfRoomsByType(0)}}</div>
       <div class="imgBtn">
         <p>Economy</p>
         <p class="price">50 lei</p>
