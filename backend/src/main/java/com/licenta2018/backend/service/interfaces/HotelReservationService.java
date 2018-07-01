@@ -10,5 +10,5 @@ public interface HotelReservationService extends CrudService<HotelReservation> {
 
     List<FreeRoomsDto> getAvailableRoomsToday();
 
-    BookedDaysOfMonth getFullyBookedDaysOfMonth(int month);
+    BookedDaysOfMonth getFullyBookedDaysOfMonth(String roomType, int year, int month);
 }

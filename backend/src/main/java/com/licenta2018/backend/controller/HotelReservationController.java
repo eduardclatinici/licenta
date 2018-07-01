@@ -41,7 +41,9 @@ public class HotelReservationController {
     }
 
     @GetMapping("/fullyBookedDaysOfMonth")
-    public BookedDaysOfMonth getfullyBookedDaysOfMonth(@NotNull @RequestParam("month") int month) {
-        return hotelReservationService.getFullyBookedDaysOfMonth(month);
+    public BookedDaysOfMonth getfullyBookedDaysOfMonth(@NotNull @RequestParam("roomType") String roomType,
+                                                       @NotNull @RequestParam("year") int year,
+                                                       @NotNull @RequestParam("month") int month) {
+        return hotelReservationService.getFullyBookedDaysOfMonth(roomType, year, month);
     }
 }

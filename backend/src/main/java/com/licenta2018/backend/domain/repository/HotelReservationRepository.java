@@ -18,7 +18,9 @@ public interface HotelReservationRepository extends JpaRepository<HotelReservati
     List<BookedHotelRooms> findBookedRoomsCount();
 
     @Query("SELECT r FROM HotelReservation r WHERE " +
-           "(r.startDate >= ?1 AND r.startDate <= ?2) OR " +
-           "(r.endDate >= ?1 AND r.endDate <= ?2)")
-    List<HotelReservation> findAllReservationsDuringMonth(LocalDate monthStart, LocalDate monthEnd);
+           "r.roomType = ?1 AND " +
+           "((r.startDate >= ?2 AND r.startDate <= ?3) OR " +
+           "(r.endDate >= ?3 AND r.endDate <= ?2)) " +
+           "ORDER BY r.startDate ASC")
+    List<HotelReservation> findAllReservationsDuringMonth(String roomType, LocalDate monthStart, LocalDate monthEnd);
 }
