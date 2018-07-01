@@ -1,4 +1,4 @@
-package com.licenta2018.backend.domain.dto;
+package com.licenta2018.backend.domain.dto.reservation;
 
 import java.util.List;
 

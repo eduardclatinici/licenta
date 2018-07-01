@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.time.LocalDate;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -46,7 +45,7 @@ public class HotelReservation {
     @Max(value = 4, message = "Guests number must be at most 4")
     private int numberOfGuests;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "CLIENT_ID")
     private User user;
 
@@ -86,6 +85,10 @@ public class HotelReservation {
 
     public void setNumberOfGuests(int numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setUser(User user) {

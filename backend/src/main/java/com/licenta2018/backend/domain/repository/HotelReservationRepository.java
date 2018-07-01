@@ -13,12 +13,14 @@ import java.util.List;
 public interface HotelReservationRepository extends JpaRepository<HotelReservation, Long> {
 
     @Query("SELECT new com.licenta2018.backend.rooms.BookedHotelRooms(r.roomType, count(r)) " +
-           "FROM HotelReservation r WHERE r.status = \'ACTIVE\' AND r.startDate = CURRENT_DATE " +
+           "FROM HotelReservation r WHERE r.status = \'ACTIVE\' AND r.startDate = ?1 " +
            "GROUP BY r.roomType")
-    List<BookedHotelRooms> findBookedRoomsCount();
+    List<BookedHotelRooms> findBookedRoomsCount(LocalDate tomorrow);
 
     @Query("SELECT r FROM HotelReservation r WHERE " +
-           "(r.startDate >= ?1 AND r.startDate <= ?2) OR " +
-           "(r.endDate >= ?1 AND r.endDate <= ?2)")
-    List<HotelReservation> findAllReservationsDuringMonth(LocalDate monthStart, LocalDate monthEnd);
+           "r.roomType = ?1 AND " +
+           "((r.startDate >= ?2 AND r.startDate <= ?3) OR " +
+           "(r.endDate >= ?3 AND r.endDate <= ?2)) " +
+           "ORDER BY r.startDate ASC")
+    List<HotelReservation> findAllReservationsDuringMonth(String roomType, LocalDate monthStart, LocalDate monthEnd);
 }

@@ -1,4 +1,6 @@
-package com.licenta2018.backend.domain.dto;
+package com.licenta2018.backend.domain.dto.reservation;
+
+import com.licenta2018.backend.domain.dto.DateDTO;
 
 public class HotelReservationDTO {
     private DateDTO startDate;
@@ -6,8 +8,7 @@ public class HotelReservationDTO {
     private String roomType;
     private int numberOfGuests;
 
-    public HotelReservationDTO(){
-    }
+    public HotelReservationDTO(){}
 
     public HotelReservationDTO(DateDTO startDate, DateDTO endDate, String roomType, int numberOfGuests) {
         this.startDate = startDate;

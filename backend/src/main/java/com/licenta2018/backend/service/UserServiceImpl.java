@@ -1,18 +1,16 @@
 package com.licenta2018.backend.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-
-
 import com.licenta2018.backend.domain.model.user.User;
 import com.licenta2018.backend.domain.repository.UserRepository;
 import com.licenta2018.backend.domain.transformer.UserTransformer;
 import com.licenta2018.backend.exceptions.AppUserNotFoundException;
 import com.licenta2018.backend.service.interfaces.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {

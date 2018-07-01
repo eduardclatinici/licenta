@@ -1,8 +1,8 @@
 package com.licenta2018.backend.controller;
 
-import com.licenta2018.backend.domain.dto.BookedDaysOfMonth;
-import com.licenta2018.backend.domain.dto.FreeRoomsDto;
-import com.licenta2018.backend.domain.dto.HotelReservationDTO;
+import com.licenta2018.backend.domain.dto.reservation.BookedDaysOfMonth;
+import com.licenta2018.backend.domain.dto.reservation.FreeRoomsDto;
+import com.licenta2018.backend.domain.dto.reservation.HotelReservationDTO;
 import com.licenta2018.backend.domain.transformer.HotelReservationTransformer;
 import com.licenta2018.backend.service.interfaces.HotelReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +35,15 @@ public class HotelReservationController {
         return new ResponseEntity(OK);
     }
 
-    @GetMapping("/availableRoomsToday")
-    public List<FreeRoomsDto> getAvailableRoomsToday() {
-        return hotelReservationService.getAvailableRoomsToday();
+    @GetMapping("/availableRoomsTomorrow")
+    public List<FreeRoomsDto> getAvailableRoomsTomorrow() {
+        return hotelReservationService.getAvailableRoomsTomorrow();
     }
 
     @GetMapping("/fullyBookedDaysOfMonth")
-    public BookedDaysOfMonth getfullyBookedDaysOfMonth(@NotNull @RequestParam("month") int month) {
-        return hotelReservationService.getFullyBookedDaysOfMonth(month);
+    public BookedDaysOfMonth getfullyBookedDaysOfMonth(@NotNull @RequestParam("roomType") String roomType,
+                                                       @NotNull @RequestParam("year") int year,
+                                                       @NotNull @RequestParam("month") int month) {
+        return hotelReservationService.getFullyBookedDaysOfMonth(roomType, year, month);
     }
 }

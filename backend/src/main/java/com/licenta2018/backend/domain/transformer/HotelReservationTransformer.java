@@ -1,6 +1,6 @@
 package com.licenta2018.backend.domain.transformer;
 
-import com.licenta2018.backend.domain.dto.HotelReservationDTO;
+import com.licenta2018.backend.domain.dto.reservation.HotelReservationDTO;
 import com.licenta2018.backend.domain.model.reservation.HotelReservation;
 import org.springframework.stereotype.Component;
 

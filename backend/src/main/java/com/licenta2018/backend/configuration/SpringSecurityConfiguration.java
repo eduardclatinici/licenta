@@ -42,10 +42,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/availableRoomsToday").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/fullyBookedDaysOfMonth").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .anyRequest().authenticated()
                 .antMatchers(HttpMethod.POST, "/api/app-user/forgot-password").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/app-user/change-password").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/tasks").hasAnyAuthority("ADMIN", "EMPLOYEE")
+                .antMatchers(HttpMethod.POST, "/api/tasks").hasAnyAuthority("ADMIN", "EMPLOYEE")
                 .antMatchers("/api/app-user/userdetails").hasAnyAuthority("ADMIN","USER", "EMPLOYEE")
                 .antMatchers("/api/app-user/user").hasAuthority("USER")
                 .antMatchers("/api/app-user/**").hasAuthority("ADMIN")
