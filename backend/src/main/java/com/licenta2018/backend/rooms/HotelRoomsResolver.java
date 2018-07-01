@@ -25,10 +25,10 @@ public class HotelRoomsResolver {
     private static final Map<String, Long> hotelRooms = ImmutableMap.<String, Long>builder()
             .put("Economy (Dog)", 10L)
             .put("Regular (Dog)", 5L)
-            .put("VIP (Dog)", 3L)
+            .put("Vip (Dog)", 3L)
             .put("Economy (Cat)", 10L)
             .put("Regular (Cat)", 5L)
-            .put("VIP (Cat)", 3L)
+            .put("Vip (Cat)", 3L)
             .build();
 
     public Map<String, Long> getHotelTotalRooms() {
