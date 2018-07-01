@@ -27,6 +27,6 @@ public class EmployeeController {
     @PostMapping("/tasks/{id}")
     public TaskDTO processTask(@PathVariable("id") long id,
                                @RequestParam("file") MultipartFile file) {
-        return taskService.processTask(id);
+        return taskService.processTask(id, file);
     }
 }

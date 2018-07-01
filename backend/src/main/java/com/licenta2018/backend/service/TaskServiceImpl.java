@@ -10,6 +10,7 @@ import com.licenta2018.backend.service.interfaces.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,6 +28,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskTransformer taskTransformer;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
     @Override
     public void createTasksForHotelReservation(HotelReservation hotelReservation) {
@@ -50,10 +54,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDTO processTask(long id) {
+    public TaskDTO processTask(long id, MultipartFile file) {
         Task task = getById(id);
-        setTaskFinished(task);
-
+        String filePath = fileStorageService.storeFile(id, file);
+        setTaskFinished(task, filePath);
         return taskTransformer.toDTO(task);
     }
 
@@ -106,8 +110,9 @@ public class TaskServiceImpl implements TaskService {
         save(new Task("Playing time", startTime.plusHours(8), startTime.plusHours(10), hotelReservation));
     }
 
-    private void setTaskFinished(Task task) {
+    private void setTaskFinished(Task task, String filePath) {
         task.setStatus(FINISHED);
+        task.setFilePath(filePath);
         taskRepository.save(task);
     }
 }

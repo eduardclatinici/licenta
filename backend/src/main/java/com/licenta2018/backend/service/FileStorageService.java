@@ -21,9 +21,11 @@ public class FileStorageService {
 
     private static final Logger log = LoggerFactory.getLogger(FileStorageService.class);
 
-    public String storeFile(MultipartFile file, long id) {
-        String fileName = "task";
+    String storeFile(long id, MultipartFile file) {
+        String fileName = file.getOriginalFilename();
         Path directoryPath = Paths.get(fileStorageProperties.getUploadDir() + "/" + id).toAbsolutePath().normalize();
+
+        createDirectory(directoryPath);
 
         Path targetLocation = directoryPath.resolve(fileName);
         try {
@@ -31,14 +33,14 @@ public class FileStorageService {
         } catch (IOException e) {
             return null;
         }
-        return targetLocation.toString();
+        return targetLocation.toAbsolutePath().toString();
     }
 
     private void createDirectory(Path fileStorageLocation) {
         try {
-            Files.createDirectory(fileStorageLocation);
+            Files.createDirectories(fileStorageLocation);
         } catch (IOException e) {
-            log.warn("Directory already exists - {}", fileStorageLocation.toAbsolutePath());
+            log.warn("Directory already exists - {}", fileStorageLocation.toAbsolutePath().toString());
         }
     }
 }
