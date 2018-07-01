@@ -16,10 +16,10 @@
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-            {{selectedRoomOption}}
+            {{selectedRoomType}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" *ngFor="let option of getOtherOptions()" (click)="selectedRoomOption=option">{{option}}</a>
+            <a class="dropdown-item" *ngFor="let option of getOtherOptions()" (click)="selectedRoomType=option">{{option}}</a>
           </div>
         </div>
 
@@ -39,12 +39,12 @@
 
       <h6>Numarul de oaspeti:</h6>
       <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButtonGuests" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-          {{selectedGuestOption}}
+          {{selectedNumberOfGuests}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" *ngFor="let option of getOtherGuestOptions()" (click)="selectedGuestOption=option">{{option}}</a>
+          <a class="dropdown-item" *ngFor="let option of getOtherGuestOptions()" (click)="selectedNumberOfGuests=option">{{option}}</a>
         </div>
       </div>
 

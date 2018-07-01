@@ -5,7 +5,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {DateRange} from '../../models/dateRange.model';
 import {HotelReservationModel} from '../../models/hotelReservation.model';
 import {ReservationService} from '../../services/reservation.service';
-import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -17,10 +16,10 @@ export class ModalReservationComponent implements OnInit {
 
   reservationModel : HotelReservationModel = new HotelReservationModel();
 
-  @Input() selectedRoomOption : String;
-  private roomOptions = ["Economy (Dog)","Regular (Dog)","Vip (Dog)","Economy (Cat)","Regular (Cat)","Vip (Cat)"];
+  @Input() selectedRoomType : String;
+  private roomTypes = ["Economy (Dog)","Regular (Dog)","Vip (Dog)","Economy (Cat)","Regular (Cat)","Vip (Cat)"];
 
-  selectedGuestOption : number = 1;
+  selectedNumberOfGuests : number = 1;
   private guestOptions = [1,2,3,4];
 
   private startDate : NgbDateStruct;
@@ -34,7 +33,6 @@ export class ModalReservationComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
     private reservationService : ReservationService,
-    private toastr : ToastrService
   ) {
       this.createForm();
   }
@@ -47,28 +45,27 @@ export class ModalReservationComponent implements OnInit {
     });
   }
   private submitForm() {
-    this.reservationModel.roomOption = this.selectedRoomOption;
-    this.reservationModel.guestsNumber = this.selectedGuestOption;
+    this.reservationModel.roomType = this.selectedRoomType;
+    this.reservationModel.numberOfGuests = this.selectedNumberOfGuests;
     this.reservationModel.startDate = this.startDate;
     this.reservationModel.endDate = this.endDate;
 
     this.reservationService.createReservation(this.reservationModel).subscribe(response => {
       this.activeModal.close();
-      this.toastr.success('Rezervarea a fost creata', 'Succes');
     },
     err => {
-      this.toastr.error('Va rugam incercati mai tarziu', 'Eroare');
+      console.log("eroare in crearea rezervarii")
     });
 
     this.activeModal.close(this.myForm.value);
   }
 
   private getOtherOptions(){
-    return this.roomOptions.filter(x => x != this.selectedRoomOption)
+    return this.roomTypes.filter(x => x != this.selectedRoomType)
   }
 
   private getOtherGuestOptions(){
-    return this.guestOptions.filter(x => x != this.selectedGuestOption)
+    return this.guestOptions.filter(x => x != this.selectedNumberOfGuests)
   }
 
   dateRangeListener(dateRangeEmitter : DateRange) {

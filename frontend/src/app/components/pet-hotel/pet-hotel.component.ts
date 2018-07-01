@@ -27,7 +27,7 @@ export class PetHotelComponent implements OnInit {
     }
     else{
       const modalRef = this.modalService.open(ModalReservationComponent);
-      modalRef.componentInstance.selectedRoomOption=this.options[id];
+      modalRef.componentInstance.selectedRoomType=this.options[id];
       modalRef.result.then().catch((error) => {
         console.log(error);
       });

@@ -11,5 +11,5 @@ import com.licenta2018.backend.domain.model.reservation.HotelReservation;
 public class ClientController {
 
     @PostMapping("/hotel-reservation")
-    public HotelReservation createReservation (){return null;};
+    public HotelReservation createReservation (){return null;}
 }

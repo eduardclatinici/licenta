@@ -1,8 +1,8 @@
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 export class HotelReservationModel{
-  roomOption : String;
-  guestsNumber: number;
+  roomType : String;
+  numberOfGuests: number;
   startDate: NgbDateStruct;
   endDate: NgbDateStruct;
 }
