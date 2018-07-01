@@ -106,4 +106,8 @@ public class Task {
     public boolean isSeen() {
         return seen;
     }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
 }

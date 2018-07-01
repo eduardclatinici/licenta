@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class NotificationTransformer {
 
     public NotificationDTO fromTask(Task task) {
-        return new NotificationDTO(task.getId(), task.getName(), task.getEndHour(), task.getFilePath());
+        return new NotificationDTO(task.getId(), task.getName(), task.getEndHour(), task.getFilePath(), task.isSeen());
     }
 }

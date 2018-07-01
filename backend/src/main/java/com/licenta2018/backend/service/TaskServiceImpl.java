@@ -70,11 +70,23 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public ClientNotificationsDTO getClientNotifications() {
         return new ClientNotificationsDTO(
-                taskRepository.findTasksNotSeenByUser(getLoggedUser())
+                taskRepository.findTasksForUser(getLoggedUser())
                 .stream()
                 .map(task -> notificationTransformer.fromTask(task))
                 .collect(Collectors.toList())
         );
+    }
+
+    @Override
+    public void markNotificationAsSeen(long id) {
+        Task task = getById(id);
+        setTaskAsSeen(task);
+    }
+
+    @Override
+    public void markClientNotificationsAsSeen() {
+        taskRepository.findTasksForUser(getLoggedUser())
+                .forEach(this::setTaskAsSeen);
     }
 
     @Override
@@ -130,6 +142,11 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(FINISHED);
         task.setFilePath(filePath);
         taskRepository.save(task);
+    }
+
+    private void setTaskAsSeen(Task task) {
+        task.setSeen(true);
+        save(task);
     }
 
     private String getLoggedUser() {

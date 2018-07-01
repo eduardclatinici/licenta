@@ -16,4 +16,8 @@ public interface TaskService extends CrudService<Task> {
     TaskDTO processTask(long id, MultipartFile file);
 
     ClientNotificationsDTO getClientNotifications();
+
+    void markNotificationAsSeen(long id);
+
+    void markClientNotificationsAsSeen();
 }
