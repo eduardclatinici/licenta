@@ -13,7 +13,7 @@ import java.util.List;
 public interface HotelReservationRepository extends JpaRepository<HotelReservation, Long> {
 
     @Query("SELECT new com.licenta2018.backend.rooms.BookedHotelRooms(r.roomType, count(r)) " +
-           "FROM HotelReservation r WHERE r.status = \'ACTIVE\' AND r.startDate = ?1 " +
+           "FROM HotelReservation r WHERE r.status = \'PENDING\' AND r.startDate = ?1 " +
            "GROUP BY r.roomType")
     List<BookedHotelRooms> findBookedRoomsCount(LocalDate tomorrow);
 
