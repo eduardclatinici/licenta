@@ -15,4 +15,9 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
            "t.startHour > ?1 AND t.endHour < ?2 " +
            "ORDER BY t.startHour ASC")
     List<Task> findAvailableTasks(LocalDateTime startDay, LocalDateTime endDay);
+
+    @Query("SELECT t FROM Task t WHERE t.status = \'FINISHED\' AND t.seen = false AND " +
+           "t.hotelReservation.user.email = ?1 " +
+           "ORDER BY t.startHour DESC")
+    List<Task> findTasksNotSeenByUser(String user);
 }

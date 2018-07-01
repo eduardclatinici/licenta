@@ -56,6 +56,24 @@ public class HotelRoomsResolver {
                 .collect(Collectors.toList());
     }
 
+    public String computeRoomNumber(String roomType, LocalDate startDate) {
+        String room = "";
+        String roomPrefix = getRoomPrefix(roomType);
+        List<HotelReservation> hotelReservations = hotelReservationRepository.findReservationsByRoomTypeAndStartDate(roomType, startDate);
+        List<String> bookedRoomNumbers = hotelReservations
+                .stream()
+                .map(HotelReservation::getRoom)
+                .collect(Collectors.toList());
+        for (long nr = 1; nr <= hotelRooms.get(roomType); ++ nr) {
+            String roomNumber = roomPrefix.concat(Long.toString(nr));
+            if (!bookedRoomNumbers.contains(roomNumber)) {
+                room = roomNumber;
+                break;
+            }
+        }
+        return room;
+    }
+
     private long getCountOfBookedRoomsByType(String roomType, List<BookedHotelRooms> bookedHotelRooms) {
         return bookedHotelRooms.stream()
                 .filter(room -> roomType.equals(room.getRoomType()))
@@ -92,5 +110,24 @@ public class HotelRoomsResolver {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList())
         );
+    }
+
+    private String getRoomPrefix(String roomType) {
+        switch (roomType) {
+            case "Economy (Dog)" :
+                return "ED";
+            case "Regular (Dog)" :
+                return "RD";
+            case "Vip (Dog)" :
+                return "VD";
+            case "Economy (Cat)" :
+                return "EC";
+            case "Regular (Cat)" :
+                return "RC";
+            case "Vip (Cat)" :
+                return "VC";
+            default :
+                return "undefined";
+        }
     }
 }

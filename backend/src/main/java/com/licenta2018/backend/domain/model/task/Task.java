@@ -49,6 +49,10 @@ public class Task {
     @Column
     private String filePath;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    @NotNull(message = "seen cannot be null")
+    private boolean seen;
+
     public Task() {}
 
     public Task(String name, LocalDateTime startHour, LocalDateTime endHour, HotelReservation hotelReservation) {
@@ -97,5 +101,9 @@ public class Task {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public boolean isSeen() {
+        return seen;
     }
 }
