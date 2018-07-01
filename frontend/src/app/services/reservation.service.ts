@@ -12,4 +12,9 @@ export class ReservationService {
     let url = "/api/hotelReservations";
     return this.http.post(url,reservationModel,{observe:'response'});
   }
+
+  getAvailableRoomsTomorrow() : Observable<HttpResponse<any>>{
+    let url = '/api/availableRoomsTomorrow';
+    return this.http.get(url,{observe:'response'});
+  }
 }

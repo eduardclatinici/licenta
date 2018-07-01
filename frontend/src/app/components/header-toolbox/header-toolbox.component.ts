@@ -28,7 +28,7 @@ export class HeaderToolboxComponent implements OnInit {
         localStorage.setItem('authority', this.user.authority);
       },
       (error) => {
-        console.log('Error in header-toolbox');
+
       }
     );
 
@@ -46,9 +46,8 @@ export class HeaderToolboxComponent implements OnInit {
   }
 
   logout() {
+    this.localStorageService.clearLocalStorage();
     this.authService.logout().subscribe(response => {
-      this.localStorageService.clearLocalStorage();
-      this.user = new UserModel();
     });
   }
 
