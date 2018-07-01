@@ -1,8 +1,8 @@
 package com.licenta2018.backend.rooms;
 
 import com.google.common.collect.ImmutableMap;
-import com.licenta2018.backend.domain.dto.BookedDaysOfMonth;
-import com.licenta2018.backend.domain.dto.FreeRoomsDto;
+import com.licenta2018.backend.domain.dto.reservation.BookedDaysOfMonth;
+import com.licenta2018.backend.domain.dto.reservation.FreeRoomsDto;
 import com.licenta2018.backend.domain.model.reservation.HotelReservation;
 import com.licenta2018.backend.domain.repository.HotelReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +44,9 @@ public class HotelRoomsResolver {
         return getBookedDaysOfMonth(hotelCapabilities, roomType);
     }
 
-    public List<FreeRoomsDto> getAvailableRoomsToday() {
-        List<BookedHotelRooms> bookedHotelRooms = hotelReservationRepository.findBookedRoomsCount();
+    public List<FreeRoomsDto> getAvailableRoomsTomorrow() {
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        List<BookedHotelRooms> bookedHotelRooms = hotelReservationRepository.findBookedRoomsCount(tomorrow);
         return hotelRooms.keySet()
                 .stream()
                 .map(roomType -> {

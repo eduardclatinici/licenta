@@ -45,7 +45,7 @@ public class HotelReservation {
     @Max(value = 4, message = "Guests number must be at most 4")
     private int numberOfGuests;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "CLIENT_ID")
     private User user;
 
@@ -85,6 +85,10 @@ public class HotelReservation {
 
     public void setNumberOfGuests(int numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setUser(User user) {

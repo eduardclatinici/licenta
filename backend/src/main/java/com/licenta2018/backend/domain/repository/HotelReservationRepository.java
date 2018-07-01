@@ -13,9 +13,9 @@ import java.util.List;
 public interface HotelReservationRepository extends JpaRepository<HotelReservation, Long> {
 
     @Query("SELECT new com.licenta2018.backend.rooms.BookedHotelRooms(r.roomType, count(r)) " +
-           "FROM HotelReservation r WHERE r.status = \'ACTIVE\' AND r.startDate = CURRENT_DATE " +
+           "FROM HotelReservation r WHERE r.status = \'ACTIVE\' AND r.startDate = ?1 " +
            "GROUP BY r.roomType")
-    List<BookedHotelRooms> findBookedRoomsCount();
+    List<BookedHotelRooms> findBookedRoomsCount(LocalDate tomorrow);
 
     @Query("SELECT r FROM HotelReservation r WHERE " +
            "r.roomType = ?1 AND " +

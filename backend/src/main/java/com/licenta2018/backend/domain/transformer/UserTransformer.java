@@ -1,12 +1,11 @@
 package com.licenta2018.backend.domain.transformer;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.licenta2018.backend.domain.dto.UserDTO;
 import com.licenta2018.backend.domain.model.user.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class UserTransformer implements Transformer<User, UserDTO> {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
