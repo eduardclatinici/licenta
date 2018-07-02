@@ -1,14 +1,17 @@
 package com.licenta2018.backend.service;
 
+import com.licenta2018.backend.domain.dto.notification.ClientNotificationsDTO;
 import com.licenta2018.backend.domain.dto.task.AvailableTasksDTO;
 import com.licenta2018.backend.domain.dto.task.TaskDTO;
 import com.licenta2018.backend.domain.model.reservation.HotelReservation;
 import com.licenta2018.backend.domain.model.task.Task;
 import com.licenta2018.backend.domain.repository.TaskRepository;
+import com.licenta2018.backend.domain.transformer.NotificationTransformer;
 import com.licenta2018.backend.domain.transformer.TaskTransformer;
 import com.licenta2018.backend.service.interfaces.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +34,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private FileStorageService fileStorageService;
+
+    @Autowired
+    private NotificationTransformer notificationTransformer;
 
     @Override
     public void createTasksForHotelReservation(HotelReservation hotelReservation) {
@@ -59,6 +65,28 @@ public class TaskServiceImpl implements TaskService {
         String filePath = fileStorageService.storeFile(id, file);
         setTaskFinished(task, filePath);
         return taskTransformer.toDTO(task);
+    }
+
+    @Override
+    public ClientNotificationsDTO getClientNotifications() {
+        return new ClientNotificationsDTO(
+                taskRepository.findTasksForUser(getLoggedUser())
+                .stream()
+                .map(task -> notificationTransformer.fromTask(task))
+                .collect(Collectors.toList())
+        );
+    }
+
+    @Override
+    public void markNotificationAsSeen(long id) {
+        Task task = getById(id);
+        setTaskAsSeen(task);
+    }
+
+    @Override
+    public void markClientNotificationsAsSeen() {
+        taskRepository.findTasksForUser(getLoggedUser())
+                .forEach(this::setTaskAsSeen);
     }
 
     @Override
@@ -114,5 +142,14 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(FINISHED);
         task.setFilePath(filePath);
         taskRepository.save(task);
+    }
+
+    private void setTaskAsSeen(Task task) {
+        task.setSeen(true);
+        save(task);
+    }
+
+    private String getLoggedUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

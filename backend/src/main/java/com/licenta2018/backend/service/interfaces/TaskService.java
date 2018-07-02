@@ -1,5 +1,6 @@
 package com.licenta2018.backend.service.interfaces;
 
+import com.licenta2018.backend.domain.dto.notification.ClientNotificationsDTO;
 import com.licenta2018.backend.domain.dto.task.AvailableTasksDTO;
 import com.licenta2018.backend.domain.dto.task.TaskDTO;
 import com.licenta2018.backend.domain.model.reservation.HotelReservation;
@@ -13,4 +14,10 @@ public interface TaskService extends CrudService<Task> {
     AvailableTasksDTO getAvailableTasks();
 
     TaskDTO processTask(long id, MultipartFile file);
+
+    ClientNotificationsDTO getClientNotifications();
+
+    void markNotificationAsSeen(long id);
+
+    void markClientNotificationsAsSeen();
 }

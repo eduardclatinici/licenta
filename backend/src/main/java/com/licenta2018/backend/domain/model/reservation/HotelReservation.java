@@ -53,14 +53,19 @@ public class HotelReservation {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column
+    @NotNull
+    private String room;
+
     public HotelReservation() {}
 
-    public HotelReservation(LocalDate startDate, LocalDate endDate, String roomType, int numberOfGuests, Status status) {
+    public HotelReservation(LocalDate startDate, LocalDate endDate, String roomType, int numberOfGuests, Status status, String room) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.roomType = roomType;
         this.numberOfGuests = numberOfGuests;
         this.status = status;
+        this.room = room;
     }
 
     public LocalDate getStartDate() {
@@ -93,6 +98,10 @@ public class HotelReservation {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getRoom() {
+        return room;
     }
 
     public enum Status {
