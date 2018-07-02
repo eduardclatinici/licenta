@@ -39,6 +39,14 @@ p {
   padding: 0;
 }
 
+.login-text{
+  cursor: pointer;
+}
+
+.login-text:hover{
+  text-decoration: underline;
+}
+
 @media (min-width: 576px) {
   p {
     visibility: visible;

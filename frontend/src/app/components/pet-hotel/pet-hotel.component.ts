@@ -7,6 +7,7 @@ import {ModalUserDataComponent} from '../modal-user-data/modal-user-data.compone
 import {LocalStorageService} from '../../services/local-storage.service';
 import {AvailableRoomsTomorrowModel} from '../../models/availableRoomsTomorrowModel';
 import {ReservationService} from '../../services/reservation.service';
+import {DatePickerService} from '../../services/date-picker.service';
 
 @Component({
   selector: 'app-pet-hotel',
@@ -23,9 +24,13 @@ export class PetHotelComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.callAvailableRooms();
+  }
+
+  callAvailableRooms(){
     this.reservationService.getAvailableRoomsTomorrow().subscribe(response =>{
-      this.availableRoomsTomorrow = response.body;
-    },
+        this.availableRoomsTomorrow = response.body;
+      },
       error =>{
 
       })
@@ -38,7 +43,10 @@ export class PetHotelComponent implements OnInit {
     else {
       const modalRef = this.modalService.open(ModalReservationComponent);
       modalRef.componentInstance.selectedRoomType = this.options[id];
-      modalRef.result.then().catch((error) => {
+      modalRef.result.then((result)=>{
+        if(result == 'success')
+          this.callAvailableRooms();
+      }).catch((error) => {
         console.log(error);
       });
     }
@@ -46,6 +54,8 @@ export class PetHotelComponent implements OnInit {
 
 
   getNumberOfRoomsByType(typeIndex : number) {
-    return this.availableRoomsTomorrow.filter((room)=> room.roomType==this.options[typeIndex]).map((room) => room.availableRooms+'/'+room.totalRooms);
+    if(this.availableRoomsTomorrow!=undefined)
+      return this.availableRoomsTomorrow.filter((room)=> room.roomType==this.options[typeIndex]).map((room) => room.availableRooms+'/'+room.totalRooms);
+    return null;
   }
 }

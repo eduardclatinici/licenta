@@ -12,20 +12,21 @@ export class TasksComponent implements OnInit {
   taskId: number;
 
   taskArray : TaskModel[] = [
-    { id: 0, description: 'Mancare', room: 'H2', time: '20:00', base64File: 'file' },
-    { id: 1, description: 'Plimbare', room: 'H8', time: '08:00', base64File: 'file' },
-    { id: 2, description: 'Asistenta', room: 'H7', time: '10:00', base64File: 'file' },
-    { id: 3, description: 'Mancare', room: 'H1', time: '11:30', base64File: 'file' },
-    { id: 4, description: 'Plimbare', room: 'H3', time: '21:00', base64File: 'file' },
-    { id: 5, description: 'Asistenta', room: 'H9', time: '20:30', base64File: 'file' },
-    { id: 6, description: 'Mancare', room: 'H6', time: '09:15', base64File: 'file' },
-    { id: 7, description: 'Plimbare', room: 'H5', time: '14:45', base64File: 'file' },
-    { id: 8, description: 'Asistenta', room: 'H4', time: '17:15', base64File: 'file' },
+    { id: 0, name: 'Mancare', hotelReservation: 'H2', time: '20:00', base64File: 'file' },
+    { id: 1, name: 'Plimbare', hotelReservation: 'H8', time: '08:00', base64File: 'file' },
+    { id: 2, name: 'Asistenta', hotelReservation: 'H7', time: '10:00', base64File: 'file' },
+    { id: 3, name: 'Mancare', hotelReservation: 'H1', time: '11:30', base64File: 'file' },
+    { id: 4, name: 'Plimbare', hotelReservation: 'H3', time: '21:00', base64File: 'file' },
+    { id: 5, name: 'Asistenta', hotelReservation: 'H9', time: '20:30', base64File: 'file' },
+    { id: 6, name: 'Mancare', hotelReservation: 'H6', time: '09:15', base64File: 'file' },
+    { id: 7, name: 'Plimbare', hotelReservation: 'H5', time: '14:45', base64File: 'file' },
+    { id: 8, name: 'Asistenta', hotelReservation: 'H4', time: '17:15', base64File: 'file' },
   ];
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
 

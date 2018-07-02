@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {DateRange} from '../../models/dateRange.model';
 import {HotelReservationModel} from '../../models/hotelReservation.model';
 import {ReservationService} from '../../services/reservation.service';
+import {DatePickerService} from '../../services/date-picker.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ModalReservationComponent implements OnInit {
 
   reservationModel : HotelReservationModel = new HotelReservationModel();
 
-  @Input() selectedRoomType : String;
+  @Input() selectedRoomType : string;
   private roomTypes = ["Economy (Dog)","Regular (Dog)","Vip (Dog)","Economy (Cat)","Regular (Cat)","Vip (Cat)"];
 
   selectedNumberOfGuests : number = 1;
@@ -60,6 +61,7 @@ export class ModalReservationComponent implements OnInit {
       console.log(err)
     });
 
+    // this.activeModal.close(this.myForm.value);
   }
 
   private getOtherOptions(){

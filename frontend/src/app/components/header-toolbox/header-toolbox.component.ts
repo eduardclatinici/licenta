@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {LocalStorageService} from '../../services/local-storage.service';
 import {UserModel} from '../../models/user.model';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModalUserDataComponent} from '../modal-user-data/modal-user-data.component';
 
 @Component({
   selector: 'app-header-toolbox',
@@ -15,7 +17,8 @@ export class HeaderToolboxComponent implements OnInit {
 
   constructor(private router: Router,
               private localStorageService: LocalStorageService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -53,5 +56,9 @@ export class HeaderToolboxComponent implements OnInit {
 
   isEmployee() {
     return this.user.authority && (this.user.authority == 'EMPLOYEE' || this.user.authority == 'ADMIN')
+  }
+
+  showLogin() {
+    this.modalService.open(ModalUserDataComponent);
   }
 }

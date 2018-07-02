@@ -27,3 +27,9 @@
   </div>
 </div>
 
+<div *ngIf="!user.email" class="row">
+  <div class="col-2 offset-9">
+    <i class="login-text" (click)="showLogin()">Login</i>
+  </div>
+</div>
+

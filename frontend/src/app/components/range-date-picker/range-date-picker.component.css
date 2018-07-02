@@ -16,6 +16,15 @@
     background-color: rgba(2, 117, 216, 0.5);
   }
 
+  .custom-day.disabled{
+    background-color: red;
+    cursor : auto !important;
+  }
+  .custom-day.disabled:hover{
+    background-color: red;
+    color: black;
+  }
+
 @media (min-width: 1440px) {
   ngb-datepicker{
     font-size: 18px !important;
