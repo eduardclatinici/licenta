@@ -1,19 +1,22 @@
 package com.licenta2018.backend.service;
 
-import com.licenta2018.backend.domain.dto.FileStorageProperties;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
-import java.util.List;
+import com.licenta2018.backend.domain.dto.FileStorageProperties;
 
 @Service
 public class FileStorageService {
@@ -44,5 +47,11 @@ public class FileStorageService {
         } catch (IOException e) {
             log.warn("Directory already exists - {}", fileStorageLocation.toAbsolutePath().toString());
         }
+    }
+
+    public String getFile(int id, String fileName) throws IOException {
+        Path path = Paths.get(this.fileStorageProperties.getUploadDir()+'/'+id+'/'+fileName);
+        byte[] bytes = Files.readAllBytes(path);
+        return Base64.encodeBase64String(bytes);
     }
 }

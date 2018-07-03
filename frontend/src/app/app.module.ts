@@ -31,6 +31,7 @@ import {AdminGuard, EmployeeGuard, UserGuard} from './services/guard.service';
 import {ReservationService} from './services/reservation.service';
 import { ModalNotificationsComponent } from './components/modal-notifications/modal-notifications.component';
 import {NotificationService} from './services/notification.service';
+import { SafeHtml } from './services/safe-html.pipe';
 
 
 
@@ -51,6 +52,7 @@ import {NotificationService} from './services/notification.service';
     ModalUserDataComponent,
     TasksComponent,
     ModalNotificationsComponent,
+    SafeHtml,
   ],
   imports: [
     FormsModule,

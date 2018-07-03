@@ -7,7 +7,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalUserDataComponent} from '../modal-user-data/modal-user-data.component';
 import {ModalNotificationsComponent} from '../modal-notifications/modal-notifications.component';
 import {NotificationService} from '../../services/notification.service';
-import {ModalReservationComponent} from '../modal-reservation/modal-reservation.component';
+
+import {NotificationDTO} from '../../models/notification.model';
+
+import {ImageModel} from '../../models/image.model';
+import {TestModel} from '../../models/test.model';
 
 @Component({
   selector: 'app-header-toolbox',
@@ -17,6 +21,9 @@ import {ModalReservationComponent} from '../modal-reservation/modal-reservation.
 export class HeaderToolboxComponent implements OnInit {
 
   user: UserModel = new UserModel();
+  notifications : NotificationDTO[];
+  imageArray : ImageModel[];
+  test : TestModel[] = [];
 
   constructor(private router: Router,
               private localStorageService: LocalStorageService,
@@ -67,9 +74,22 @@ export class HeaderToolboxComponent implements OnInit {
   }
 
   openNotificationsModal() {
+    let a : number = 0;
+    this.test = [];
     this.notificationService.getNotifications().subscribe(resp => {
-      const modalRef = this.modalService.open(ModalNotificationsComponent);
-      modalRef.componentInstance.notifications = resp;
+      this.notifications = resp;
+      for(let notification of this.notifications) {
+        let splitNotif: string[] = notification.filePath.split('\\');
+        this.notificationService.getImage(notification.id, splitNotif[splitNotif.length-1]).subscribe(resp1 =>{
+          this.test.push(new TestModel(notification,resp1));
+          a+=1;
+          if(a==this.notifications.length) {
+            const modalRef = this.modalService.open(ModalNotificationsComponent);
+            modalRef.componentInstance.notifications = this.notifications;
+            modalRef.componentInstance.test = this.test;
+          }
+        })
+      }
     });
   }
 }
