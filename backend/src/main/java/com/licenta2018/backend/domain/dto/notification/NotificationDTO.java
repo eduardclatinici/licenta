@@ -34,7 +34,7 @@ public class NotificationDTO {
         return filePath;
     }
 
-    public boolean getSeen() {
+    public boolean isSeen() {
         return seen;
     }
 

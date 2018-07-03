@@ -31,7 +31,7 @@ export class RangeDatePickerComponent implements OnInit, OnChanges {
   dateRange: DateRange = new DateRange();
   @Input() selectedRoomType;
 
-  fullyBookedDaysOfJune: number[];
+  fullyBookedDaysOfJune: number[] = [8];
 
   @Input() showDatePicker;
 
@@ -53,12 +53,12 @@ export class RangeDatePickerComponent implements OnInit, OnChanges {
   }
 
   async ngOnInit() {
-    this.datePickerService.getFullyBookedDaysOfMonth(this.selectedRoomType, 2018, 7).subscribe(resp=>{
-      this.fullyBookedDaysOfJune = resp;
-      console.log(this.fullyBookedDaysOfJune);
-    },err=>{
-      console.log('error')
-    });
+    // this.datePickerService.getFullyBookedDaysOfMonth(this.selectedRoomType, 2018, 7).subscribe(resp=>{
+    //   this.fullyBookedDaysOfJune = resp;
+    //   console.log(this.fullyBookedDaysOfJune);
+    // },err=>{
+    //   console.log('error')
+    // });
 
     if (window.innerWidth > 576)
       this.displayMonths = 2;

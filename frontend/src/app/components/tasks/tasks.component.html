@@ -16,7 +16,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let task of taskArray">
+      <tr *ngFor="let task of availableTasks">
         <td class="text-center">
           <div class="text-muted">{{task.id}}</div>
         </td>
@@ -25,10 +25,10 @@
           <i class="icon-help pointer"></i>
         </td>
         <td class="text-center">
-          <div class="text-muted">{{task.hotelReservation}}</div>
+          <div class="text-muted">{{task.hotelReservation.room}}</div>
         </td>
         <td class="text-center">
-          <div class="text-muted">{{task.time}}</div>
+          <div class="text-muted">{{getAvailableTaskHour(task)}}</div>
         </td>
         <td class="text-center">
           <label>
@@ -40,7 +40,7 @@
         </td>
         <td class="text-center">
           <div class="row row-no-margin">
-            <div class="col-6 col-no-padding">
+            <div class="col-6 col-no-padding" (click)="taskDone()">
               <i class="icon-checkmark-circle pointer" title="Submit"></i>
             </div>
             <div class="col-6 col-no-padding">

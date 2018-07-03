@@ -1,0 +1,32 @@
+img{
+  height:100px;
+  object-fit: contain;
+  position: relative;
+  left:50%;
+  transform: translateX(-50%);
+}
+
+.close{
+  position: absolute;
+  right: -9999px;
+}
+
+.modal-header{color: #0092dd;}
+
+.content-row{
+  border-bottom: solid black 1px;
+}
+
+.item-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unseen-notif{
+  font-weight: bolder;
+}
+
+.seen-notif{
+  font-weight: normal;
+}

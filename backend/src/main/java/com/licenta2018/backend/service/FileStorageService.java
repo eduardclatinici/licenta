@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class FileStorageService {
@@ -27,7 +29,7 @@ public class FileStorageService {
 
         createDirectory(directoryPath);
 
-        Path targetLocation = directoryPath.resolve(fileName);
+        Path targetLocation = directoryPath.resolve("name"+'.'+fileName.split("\\.")[1]);
         try {
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

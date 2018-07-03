@@ -26,11 +26,11 @@ import {AuthService} from './services/auth.service';
 import {AuthInterceptor} from './services/interceptor.service';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LocalStorageService} from './services/local-storage.service';
-import {SharedDataService} from './services/sharedData.service';
 import { TasksComponent } from './components/tasks/tasks.component';
 import {AdminGuard, EmployeeGuard, UserGuard} from './services/guard.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReservationService} from './services/reservation.service';
+import { ModalNotificationsComponent } from './components/modal-notifications/modal-notifications.component';
+import {NotificationService} from './services/notification.service';
 
 
 
@@ -50,6 +50,7 @@ import {ReservationService} from './services/reservation.service';
     DaycareComponent,
     ModalUserDataComponent,
     TasksComponent,
+    ModalNotificationsComponent,
   ],
   imports: [
     FormsModule,
@@ -66,9 +67,9 @@ import {ReservationService} from './services/reservation.service';
       }
     }),
   ],
-  providers: [CookieService, NgbActiveModal, AuthService, LocalStorageService, SharedDataService,AdminGuard,UserGuard,EmployeeGuard, ReservationService,
+  providers: [CookieService, NgbActiveModal, AuthService, LocalStorageService,AdminGuard,UserGuard,EmployeeGuard, ReservationService, NotificationService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
-  entryComponents: [ModalReservationComponent, ModalUserDataComponent]
+  entryComponents: [ModalReservationComponent, ModalUserDataComponent, ModalNotificationsComponent]
 })
 export class AppModule { }

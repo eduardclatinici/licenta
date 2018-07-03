@@ -1,5 +1,7 @@
 package com.licenta2018.backend.controller;
 
+import java.util.List;
+
 import com.licenta2018.backend.domain.dto.task.AvailableTasksDTO;
 import com.licenta2018.backend.domain.dto.task.TaskDTO;
 import com.licenta2018.backend.service.interfaces.TaskService;
@@ -20,8 +22,8 @@ public class EmployeeController {
     private TaskService taskService;
 
     @GetMapping("/tasks")
-    public AvailableTasksDTO getAvailableTask() {
-        return taskService.getAvailableTasks();
+    public List<TaskDTO> getAvailableTask() {
+        return taskService.getAvailableTasks().getAvailableTasks();
     }
 
     @PostMapping("/tasks/{id}")

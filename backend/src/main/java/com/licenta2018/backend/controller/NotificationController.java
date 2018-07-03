@@ -1,7 +1,15 @@
 package com.licenta2018.backend.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.licenta2018.backend.domain.dto.notification.ClientNotificationsDTO;
+import com.licenta2018.backend.domain.dto.notification.NotificationDTO;
 import com.licenta2018.backend.service.interfaces.TaskService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +27,8 @@ public class NotificationController {
     private TaskService taskService;
 
     @GetMapping("/notifications")
-    public ClientNotificationsDTO getClientNotifications() {
-        return taskService.getClientNotifications();
+    public List<NotificationDTO> getClientNotifications() {
+        return taskService.getClientNotifications().getNotifications();
     }
 
     @PostMapping("/notifications")
@@ -30,8 +38,8 @@ public class NotificationController {
     }
 
     @PostMapping("/notifications/{id}")
-    public ResponseEntity markNotificationAsSeen(@PathVariable("id") long id) {
+    public List<NotificationDTO> markNotificationAsSeen(@PathVariable("id") long id) {
         taskService.markNotificationAsSeen(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return taskService.getClientNotifications().getNotifications();
     }
 }

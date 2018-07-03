@@ -14,6 +14,6 @@ public class TaskTransformer implements Transformer<Task, TaskDTO> {
 
     @Override
     public TaskDTO toDTO(Task task) {
-        return new TaskDTO(task.getId(), task.getName(), task.getStartHour(), task.getEndHour(), task.getHotelReservation(), task.getFilePath());
+        return new TaskDTO(task.getId(), task.getName(), task.getStartHour(), task.getEndHour(), task.getHotelReservation(), task.getFilePath(), task.getHotelReservation().getRoom());
     }
 }

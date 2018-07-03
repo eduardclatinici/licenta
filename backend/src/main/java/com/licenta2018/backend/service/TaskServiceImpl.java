@@ -72,6 +72,7 @@ public class TaskServiceImpl implements TaskService {
         return new ClientNotificationsDTO(
                 taskRepository.findTasksForUser(getLoggedUser())
                 .stream()
+                .filter(task -> task.getStatus() == FINISHED)
                 .map(task -> notificationTransformer.fromTask(task))
                 .collect(Collectors.toList())
         );

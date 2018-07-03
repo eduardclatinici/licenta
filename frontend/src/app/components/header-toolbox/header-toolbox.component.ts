@@ -5,6 +5,9 @@ import {LocalStorageService} from '../../services/local-storage.service';
 import {UserModel} from '../../models/user.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalUserDataComponent} from '../modal-user-data/modal-user-data.component';
+import {ModalNotificationsComponent} from '../modal-notifications/modal-notifications.component';
+import {NotificationService} from '../../services/notification.service';
+import {ModalReservationComponent} from '../modal-reservation/modal-reservation.component';
 
 @Component({
   selector: 'app-header-toolbox',
@@ -18,7 +21,8 @@ export class HeaderToolboxComponent implements OnInit {
   constructor(private router: Router,
               private localStorageService: LocalStorageService,
               private authService: AuthService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private notificationService : NotificationService) {
   }
 
   ngOnInit() {
@@ -60,5 +64,12 @@ export class HeaderToolboxComponent implements OnInit {
 
   showLogin() {
     this.modalService.open(ModalUserDataComponent);
+  }
+
+  openNotificationsModal() {
+    this.notificationService.getNotifications().subscribe(resp => {
+      const modalRef = this.modalService.open(ModalNotificationsComponent);
+      modalRef.componentInstance.notifications = resp;
+    });
   }
 }

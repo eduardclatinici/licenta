@@ -5,7 +5,6 @@ import {UserModel} from '../../models/user.model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../services/auth.service';
 import {LocalStorageService} from '../../services/local-storage.service';
-import {SharedDataService} from '../../services/sharedData.service';
 
 @Component({
   selector: 'app-modal-user-data',
@@ -23,7 +22,7 @@ export class ModalUserDataComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router,
               private cookieService: CookieService, public activeModal: NgbActiveModal,
-              private localStorageService : LocalStorageService, private sharedDataService : SharedDataService) {
+              private localStorageService : LocalStorageService) {
   }
 
   ngOnInit() {

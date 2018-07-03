@@ -10,9 +10,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = LocalStorageService.getAuthorizationToken();
-    if (authToken != undefined)
-      return next.handle(req.clone({headers: req.headers.set('Authorization', authToken).set('Content-Type', 'application/json')}));
-    else
-      return next.handle(req.clone({headers : req.headers.set('Content-Type', 'application/json')}));
+    if (!req.url.includes('/api/tasks/')) {
+      if (authToken != undefined)
+        return next.handle(req.clone({headers: req.headers.set('Authorization', authToken).set('Content-Type', 'application/json')}));
+      else
+        return next.handle(req.clone({headers: req.headers.set('Content-Type', 'application/json')}));
+    }
+    else{
+      return next.handle(req.clone({headers: req.headers.set('Authorization', authToken)}))
+    }
   }
 }

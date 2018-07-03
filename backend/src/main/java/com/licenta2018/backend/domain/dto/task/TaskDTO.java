@@ -11,15 +11,17 @@ public class TaskDTO {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private HotelReservation hotelReservation;
+    private String room;
     private String filePath;
 
-    public TaskDTO(long id, String name, LocalDateTime startTime, LocalDateTime endTime, HotelReservation hotelReservation, String filePath) {
+    public TaskDTO(long id, String name, LocalDateTime startTime, LocalDateTime endTime, HotelReservation hotelReservation, String filePath, String room) {
         this.id = id;
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
         this.hotelReservation = hotelReservation;
         this.filePath = filePath;
+        this.room = room;
     }
 
     public long getId() {
